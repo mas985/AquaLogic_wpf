@@ -1,0 +1,144 @@
+﻿<Window x:Class="AquaLogic_wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AquaLogic_wpf.Properties"
+        mc:Ignorable="d"
+        Title="AquaLogic PS8 (beta)" FontSize="24" FontWeight="Bold" FontStyle="Normal" Closing="Window_Closing" Icon="/Pool.png" SizeToContent="Manual" MinHeight="640" MinWidth="360" Height="640" Width="360" ResizeMode="NoResize">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}"/>
+    </Window.Background>
+    <TabControl x:Name="tabControl" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
+        <TabItem Header="Main" FontSize="16">
+            <TabItem.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="#FFB9D1EA" Offset="1"/>
+                </LinearGradientBrush>
+            </TabItem.Background>
+            <Grid Background="#FFB9D1EA">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="textDisplay" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0,0,0,0" Background="#FFB9D1EA" AcceptsReturn="True" MaxLines="2" TextAlignment="Center" FontSize="24" IsReadOnly="True" Cursor="None" ToolTip="RESET When Frozen"/>
+ 
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="MenuBtn" Content="Menu" VerticalAlignment="Center" FontSize="24" Click="Button_Click" Width="100" Height="70" Grid.Column="1"/>
+                    <Button x:Name="PlusBtn" Content="+" VerticalAlignment="Top" FontSize="36" Click="Button_Click" Width="100" Height="50" Grid.Column="1"/>
+                    <Button x:Name="MinusBtn" Content="-" VerticalAlignment="Bottom" FontSize="36" Click="Button_Click" Width="100" Height="50" Grid.Column="1"/>
+                    <Button x:Name="LeftBtn" Content="&lt;" FontSize="36" Click="Button_Click" Width="50" Height="170"/>
+                    <Button x:Name="RightBtn" Content="&gt;" FontSize="36" Click="Button_Click" Width="50" Height="170" Grid.Column="2"/>
+                </Grid>
+
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="Pool" Content="Pool" FontSize="20" Click="Button_Click" Width="150" Height="35"/>
+                    <Button x:Name="Spa" Content="Spa" FontSize="20" Click="Button_Click" Width="150" Grid.Row="1" Height="35"/>
+                    <Button x:Name="Spillover" Content="Spillover" FontSize="20" Click="Button_Click" Width="150" Grid.Row="2" Height="35"/>
+                    <Button x:Name="Filter" Content="Filter" FontSize="20" Click="Button_Click" Width="150" Grid.Row="3" Height="35"/>
+                    <Button x:Name="Lights" Content="Lights" FontSize="20" Click="Button_Click" Width="150" Grid.Row="4" Height="35"/>
+                    <Button x:Name="Heater1" Content="Heater1" FontSize="20" Click="Button_Click" Width="150" Grid.Row="5" Height="35"/>
+
+                    <Button x:Name="Valve3" Content="{Binding Valve3, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="6" Height="35"/>
+                    <Button x:Name="Valve4" Content="{Binding Valve4, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="6" Grid.Column="1" Height="35"/>
+
+                    <Button x:Name="Aux1" Content="{Binding Aux1, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Column="1" Height="35"/>
+                    <Button x:Name="Aux2" Content="{Binding Aux2, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="1" Grid.Column="1" Height="35"/>
+                    <Button x:Name="Aux3" Content="{Binding Aux3, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="2" Grid.Column="1" Height="35"/>
+                    <Button x:Name="Aux4" Content="{Binding Aux4, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="3" Grid.Column="1" Height="35"/>
+                    <Button x:Name="Aux5" Content="{Binding Aux5, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="4" Grid.Column="1" Height="35"/>
+                    <Button x:Name="Aux6" Content="{Binding Aux6, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="5" Grid.Column="1" Height="35"/>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Settings" FontSize="16">
+            <TabItem.Background>
+                <LinearGradientBrush EndPoint="0,1">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="#FFB9D1EA" Offset="1"/>
+                </LinearGradientBrush>
+            </TabItem.Background>
+
+            <Grid Background="#FFB9D1EA">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox x:Name="ipAddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150"  Grid.Column="1" ToolTip="RESET After Change"/>
+                    <TextBox x:Name="portNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="1" Grid.Column="1" ToolTip="RESET After Change"/>
+
+                    <TextBox x:Name="Aux1_Edit" Text="{Binding Aux1, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Column="1" Grid.Row="2"/>
+                    <TextBox x:Name="Aux2_Edit" Text="{Binding Aux2, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="3" Grid.Column="1"/>
+                    <TextBox x:Name="Aux3_Edit" Text="{Binding Aux3, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="4" Grid.Column="3"/>
+                    <TextBox x:Name="Aux4_Edit" Text="{Binding Aux4, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="5" Grid.Column="1"/>
+                    <TextBox x:Name="Aux5_Edit" Text="{Binding Aux5, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="6" Grid.Column="1"/>
+                    <TextBox x:Name="Aux6_Edit" Text="{Binding Aux6, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="7" Grid.Column="1"/>
+                    <TextBox x:Name="Valve3_Edit" Text="{Binding Valve3, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="8" Grid.Column="1"/>
+                    <TextBox x:Name="Valve4_Edit" Text="{Binding Valve4, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="9" Grid.Column="1"/>
+                    <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="10" Grid.Column="1" ToolTip="Minutes"/>
+
+                    <Label x:Name="Label1" Content="IP Addr:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150"/>
+                    <Label x:Name="Label2" Content="Port #:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="1"/>
+                    <Label x:Name="Label3" Content="Aux1:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="2"/>
+                    <Label x:Name="Label4" Content="Aux2:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="3"/>
+                    <Label x:Name="Label5" Content="Aux3:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="5"/>
+                    <Label x:Name="Label6" Content="Aux4:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="4"/>
+                    <Label x:Name="Label7" Content="Aux5:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="6"/>
+                    <Label x:Name="Label8" Content="Aux6:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="7"/>
+                    <Label x:Name="Label9" Content="Valve3:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="8"/>
+                    <Label x:Name="Label10" Content="Valve4:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="9"/>
+                    <Label x:Name="Label11" Content="Log Interval:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="10"/>
+
+                </Grid>
+
+                <Button x:Name="Restart" Content="Restart" FontSize="24" Click="Restart_Click" Grid.Row="2" Height="60" Width="200"/>
+                <Label x:Name="label" Content="Settings" HorizontalAlignment="Center" FontSize="24"/>
+
+            </Grid>
+
+        </TabItem>
+    </TabControl>
+</Window>
