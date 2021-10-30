@@ -107,8 +107,8 @@ namespace AquaLogic_wpf
             {
                 _tcpClient = new(ipAddr, portNum);
                 _tcpClient.NoDelay = true;
-                _tcpClient.ReceiveTimeout = 10000;
-                //_tcpClient.SendTimeout = 150;
+                _tcpClient.ReceiveTimeout = 5000;
+                _tcpClient.SendTimeout = 1000;
 
                 _netStream = _tcpClient.GetStream();
             }
@@ -222,10 +222,9 @@ namespace AquaLogic_wpf
 
                 // Send keys
 
-                _ = _netStream.WriteAsync(queData.ToArray(), 0, queData.Count);
+                _netStream.Write(queData.ToArray(), 0, queData.Count);
 
-                queData.Clear();
-            }
+           }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
