@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>Pool.ico</ApplicationIcon>
     <Win32Resource />
@@ -15,6 +14,7 @@
     <Company>MAS Consulting</Company>
     <Description>Communcates with an AquaLogic controller</Description>
     <Version>1.0.2</Version>
+    <TargetFramework>net6.0-windows</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
