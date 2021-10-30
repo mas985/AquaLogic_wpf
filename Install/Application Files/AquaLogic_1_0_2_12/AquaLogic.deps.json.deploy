@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "AquaLogic/1.0.2": {
+        "runtime": {
+          "AquaLogic.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AquaLogic/1.0.2": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

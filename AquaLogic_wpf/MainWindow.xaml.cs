@@ -10,13 +10,7 @@ namespace AquaLogic_wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        private BackgroundWorker _backgroundWorker;
-        private SocketProcess _socketProcess;
-        
-        private readonly string _logPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),"AquaLogic.csv");
-        private DateTime _lastLog = DateTime.Now;
-
-        public MainWindow()
+         public MainWindow()
         {
 
             InitializeComponent();
@@ -25,36 +19,25 @@ namespace AquaLogic_wpf
 
         }
 
+        // UI Events
+
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             _backgroundWorker.CancelAsync();
             Properties.Settings.Default.Save();
         }
-
-        private void InitializeSocketProcess()
-        {
-            InitializeBackgroundWorker();
-
-            _socketProcess = new(Properties.Settings.Default.ipAddr, Properties.Settings.Default.portNum);
-
-            _backgroundWorker.RunWorkerAsync();
-        }
-        
  
-        // UI Events
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+         private void Button_Click(object sender, RoutedEventArgs e)
         {
              Button button = (Button)sender;
             _socketProcess.QueueKey(button.Name);
-
         }
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
             _backgroundWorker.CancelAsync();
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(125);
             _socketProcess.QueueKey("Reset");
-            System.Threading.Thread.Sleep(200);
+            System.Threading.Thread.Sleep(125);
             InitializeSocketProcess();
         }
 
@@ -64,18 +47,36 @@ namespace AquaLogic_wpf
             button.FontStyle = blink.HasFlag(state) ? FontStyles.Italic : FontStyles.Normal;
         }
 
+        // Socket Control
+
+        private BackgroundWorker _backgroundWorker;
+        private SocketProcess _socketProcess;
+
+        private void InitializeSocketProcess()
+        {
+            _socketProcess = new(Properties.Settings.Default.ipAddr, Properties.Settings.Default.portNum);
+
+            InitializeBackgroundWorker();
+
+            _backgroundWorker.RunWorkerAsync();
+        }
+
         // Background Worker
         private void InitializeBackgroundWorker()
         {
-            _backgroundWorker = new();
-            _backgroundWorker.WorkerReportsProgress = true;
-            _backgroundWorker.WorkerSupportsCancellation = true;
+            _backgroundWorker = new()
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true,
+            };
 
             _backgroundWorker.DoWork +=
                 new DoWorkEventHandler(BackgroundWorker_DoWork);
+            
             _backgroundWorker.RunWorkerCompleted +=
                 new RunWorkerCompletedEventHandler(
             BackgroundWorker_RunWorkerCompleted);
+            
             _backgroundWorker.ProgressChanged +=
                 new ProgressChangedEventHandler(
             BackgroundWorker_ProgressChanged);
@@ -87,13 +88,13 @@ namespace AquaLogic_wpf
             {
                 System.Threading.Thread.Sleep(50);
                 SocketProcess.SocketData socketData = _socketProcess.Update();
-                //DisplayText = "Connection Lost" + "\n" + "Restart Required";
+
                 if (socketData.DisplayText != null)
                 {
                     _backgroundWorker.ReportProgress(0, socketData);
                 }
             }
-        }
+         }
 
         private void BackgroundWorker_RunWorkerCompleted(
            object sender, RunWorkerCompletedEventArgs e)
@@ -109,6 +110,8 @@ namespace AquaLogic_wpf
             UpdateDisplay(socketData);
         }
 
+        private readonly string _logPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "AquaLogic.csv");
+        private DateTime _lastLog = DateTime.Now;
         private void UpdateDisplay(SocketProcess.SocketData socketData)
         {
             if (socketData.DisplayText != null)
