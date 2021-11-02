@@ -17,5 +17,4 @@ EW11 Setup
 - Double click device
 - Click edit
 
-
   
