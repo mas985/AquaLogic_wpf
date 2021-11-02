@@ -1,0 +1,45 @@
+KEEP_ALIVE = [0x10,0x02,0x01,0x01,0x00,0x14,0x10,0x03]
+RESET_CODE = [0x10,0x02,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x14,0x10,0x03]
+KA_NEXT_TIME = 0
+KEY = ""
+
+RECV UART uart0
+	FRAME = INPUT
+	IF (FRAME == KEEP_ALIVE)
+		KA_NEXT_TIME = SYSTIME + 90
+		RETURN(FALSE) # Comment out to allow KA to client\
+	ELSE
+		OUTPUT = FRAME
+		fl = FRAME.length()
+		IF (fl > 8)
+			str = FRAME.subString(fl - 8, fl)
+			IF (str == KEEP_ALIVE)  # Possible KA appended to another frame
+				KA_NEXT_TIME = SYSTIME + 90
+				OUTPUT = FRAME.subString(0, fl - 8)
+			END
+		END
+	END
+	RETURN(TRUE)
+END
+
+RECV SOCK netp
+	FRAME = INPUT
+	IF (KEY == "")
+		IF (FRAME == RESET_CODE)
+			RESET
+		ELSE
+			KEY = FRAME
+		END
+	END
+	RETURN(FALSE)
+END
+
+TIMER SendKey 1
+	IF (KEY.length() > 0)
+		IF (SYSTIME >= KA_NEXT_TIME)
+			SEND(UART, uart0, KEY)
+			# SEND(SOCK, netp, KEY) # Remove comment for confirmation message to client
+			KEY = ""
+		END
+	END
+END

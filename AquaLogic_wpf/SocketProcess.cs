@@ -239,8 +239,10 @@ namespace AquaLogic_wpf
 
             try
             {
+                int loop=0;
                 while (_tcpClient.Available > 6)
                 {
+                    loop++;
                     List<byte> recData = new();
 
                     byte pByte = 0;
@@ -267,20 +269,22 @@ namespace AquaLogic_wpf
                     _lTick = _cTick;
                     _cTick = DateTime.Now.Ticks;
                     byte[] bytes = recData.ToArray();
-
-                    //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}", (_cTick - _lTick) / 10000, BitConverter.ToString(bytes)));
+                    
+                    //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
 
                     // process segment
 
                     if (bytes.SequenceEqual(frBytes))
                     {
+                        //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
                     }
                     else if (bytes.SequenceEqual(kaBytes))
                     {
+                        //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
                     }
                     else if (bytes.Length > 6)
                     {
-                        // System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}", (_cTick - _lTick) / 10000, BitConverter.ToString(bytes)));
+                        //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
 
                         // Calculate CRC
 
@@ -314,11 +318,11 @@ namespace AquaLogic_wpf
                             }
                             else if (bytes[2] == 0x00 && bytes[3] == 0x02)
                             {
-                                //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}", (_cTick - _lTick) / 10000, BitConverter.ToString(bytes)));
+                                //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
                             }
                             else
                             {
-                                //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}", (_cTick - _lTick) / 10000, BitConverter.ToString(bytes)));
+                                //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
                             }
                         }
                         else
@@ -339,7 +343,7 @@ namespace AquaLogic_wpf
         {
             if (str.Contains("Temp"))
             {
-                _ = Int32.TryParse(str.Substring(str.Length - 4, 2), out int num);
+                _ = Int32.TryParse(str.AsSpan(str.Length - 4, 2), out int num);
                 return num;
             }
             return 0;
@@ -370,7 +374,7 @@ namespace AquaLogic_wpf
                 if (lc != " " || cc != " ") { str += cc.ToString(); }
                 if (i == isplt) { str = str.Trim() + "\n"; }
             }
-            if (str.Contains("[") && !str.Contains("]")) { str += "]"; }
+            if (str.Contains('[') && !str.Contains(']')) { str += "]"; }
             return str.Replace("_","°").Trim();
         }
 

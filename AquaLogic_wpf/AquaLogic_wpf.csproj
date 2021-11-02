@@ -14,7 +14,7 @@
     <Company>MAS Consulting</Company>
     <Description>Communcates with an AquaLogic controller</Description>
     <Version>1.0.2</Version>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -53,6 +53,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="EW11_Script.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
