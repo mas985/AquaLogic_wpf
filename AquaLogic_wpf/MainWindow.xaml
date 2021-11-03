@@ -120,7 +120,7 @@
                     <TextBox x:Name="Valve4_Edit" Text="{Binding Valve4, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="9" Grid.Column="1"/>
                     <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="10" Grid.Column="1" ToolTip="Minutes"/>
 
-                    <Label x:Name="Label1" Content="IP Addr:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150"/>
+                    <Label x:Name="Label1" Content="IP Address:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150"/>
                     <Label x:Name="Label2" Content="Port #:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="1"/>
                     <Label x:Name="Label3" Content="Aux1:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="2"/>
                     <Label x:Name="Label4" Content="Aux2:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="3"/>
