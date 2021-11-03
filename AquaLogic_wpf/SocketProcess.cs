@@ -327,7 +327,7 @@ namespace AquaLogic_wpf
                         }
                         else
                         {
-                            System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}", "CRC Error", BitConverter.ToString(bytes)));
+                            System.Diagnostics.Debug.WriteLine(string.Format("{0}   {1}",  "CRC Error", BitConverter.ToString(bytes)));
                         }
                     }
                 }

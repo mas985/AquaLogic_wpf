@@ -34,23 +34,22 @@ namespace AquaLogic_wpf
         }
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
+            RestartSocket();
+        }
+
+         // Socket Control
+
+        private BackgroundWorker _backgroundWorker;
+        private SocketProcess _socketProcess;
+
+        private void RestartSocket()
+        {
             _backgroundWorker.CancelAsync();
             System.Threading.Thread.Sleep(125);
             _socketProcess.QueueKey("Reset");
             System.Threading.Thread.Sleep(125);
             InitializeSocketProcess();
         }
-
-        private static void SetStatus(Button button, SocketProcess.States status, SocketProcess.States blink, SocketProcess.States state)
-        {
-            button.FontWeight = status.HasFlag(state) ? FontWeights.Bold : FontWeights.Regular;
-            button.FontStyle = blink.HasFlag(state) ? FontStyles.Italic : FontStyles.Normal;
-        }
-
-        // Socket Control
-
-        private BackgroundWorker _backgroundWorker;
-        private SocketProcess _socketProcess;
 
         private void InitializeSocketProcess()
         {
@@ -142,6 +141,11 @@ namespace AquaLogic_wpf
                 _lastLog = DateTime.Now;
                 SocketProcess.WriteTextFile(_logPath, socketData.LogText);
             }
+        }
+        private static void SetStatus(Button button, SocketProcess.States status, SocketProcess.States blink, SocketProcess.States state)
+        {
+            button.FontWeight = status.HasFlag(state) ? FontWeights.Bold : FontWeights.Regular;
+            button.FontStyle = blink.HasFlag(state) ? FontStyles.Italic : FontStyles.Normal;
         }
     }
 }
