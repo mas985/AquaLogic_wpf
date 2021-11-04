@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Threading;
 using System.IO;
+using System.Net.NetworkInformation;
+using System.Text;
 
 namespace AquaLogic_wpf
 {
@@ -111,7 +113,7 @@ namespace AquaLogic_wpf
                 _tcpClient.SendTimeout = 1000;
 
                 _netStream = _tcpClient.GetStream();
-            }
+             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
@@ -162,24 +164,24 @@ namespace AquaLogic_wpf
             };
         }
 
+        long _lastKey = 0;
         public void QueueKey(string key)
         {
-            if (_menu_locked && key == "RightBtn")
+            if (DateTime.Now.Ticks > _lastKey + 350000000) // 3.5 sec delay after unlock key
             {
-                SendKey("LRBtn", false);
-                for (int i = 0; i < 35; i++)
+                if (_menu_locked && key == "RightBtn")
                 {
-                    Thread.Sleep(90); // Send a little faster than necessary
-                    SendKey("LRBtn", true);
+                    SendKey("LRBtn");
+                    _lastKey = DateTime.Now.Ticks;
                 }
-            }
-            else
-            {
-                SendKey(key, false);
+                else
+                {
+                    SendKey(key);
+                }
             }
         }
 
-        private void SendKey(string key, bool hold)
+        private void SendKey(string key)
         {
             try
             {
@@ -194,15 +196,8 @@ namespace AquaLogic_wpf
                 queData.Add(_WIRED_LOCAL_KEY_EVENT);
                 byte[] aBytes = BitConverter.GetBytes((int)bKey);
                 queData.AddRange(aBytes.ToList());
-                if (hold)
-                {
-                    queData.AddRange(new byte[] { 0x00, 0x00, 0x00, 0x00 });
-                }
-                else
-                {
-                    queData.AddRange(aBytes.ToList());
-                }
-
+                queData.AddRange(aBytes.ToList());
+ 
                 short crc = 0;
                 foreach (byte aB in queData) { crc += aB; }
                 queData.AddRange(BitConverter.GetBytes(crc).Reverse().ToArray());
@@ -215,16 +210,14 @@ namespace AquaLogic_wpf
                 queData.Add(_FRAME_DLE);
                 queData.Add(_FRAME_ETX);
 
-                if (!hold) 
-                {
-                    System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}", key, BitConverter.ToString(queData.ToArray())));
-                }
-
+                System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}", key, BitConverter.ToString(queData.ToArray())));
+               
                 // Send keys
 
                 _netStream.Write(queData.ToArray(), 0, queData.Count);
+                //System.Diagnostics.Debug.WriteLine(dt);
 
-           }
+            }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
@@ -251,6 +244,8 @@ namespace AquaLogic_wpf
 
                     // read segment
 
+                    _lTick = _cTick;
+                    _cTick = DateTime.Now.Ticks;
                     while (_tcpClient.Available > 0)
                     {
                         pByte = aByte;
@@ -266,8 +261,6 @@ namespace AquaLogic_wpf
                             break;
                         }
                     }
-                    _lTick = _cTick;
-                    _cTick = DateTime.Now.Ticks;
                     byte[] bytes = recData.ToArray();
                     
                     //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
@@ -280,7 +273,7 @@ namespace AquaLogic_wpf
                     }
                     else if (bytes.SequenceEqual(kaBytes))
                     {
-                        //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
+                         System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
                     }
                     else if (bytes.Length > 6)
                     {
@@ -377,6 +370,34 @@ namespace AquaLogic_wpf
             if (str.Contains('[') && !str.Contains(']')) { str += "]"; }
             return str.Replace("_","°").Trim();
         }
+        //public long PingUART()
+        //{
+        //    Ping pingSender = new Ping();
+        //    PingOptions options = new PingOptions();
+
+        //    // Use the default Ttl value which is 128,
+        //    // but change the fragmentation behavior.
+        //    options.DontFragment = true;
+
+        //    // Create a buffer of 32 bytes of data to be transmitted.
+        //    string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        //    byte[] buffer = Encoding.ASCII.GetBytes(data);
+        //    int timeout = 120;
+        //    PingReply reply = pingSender.Send(_ipaddr, timeout, buffer, options);
+        //    if (reply.Status == IPStatus.Success)
+        //    {
+        //        //System.Diagnostics.Debug.WriteLine("Address: {0}", reply.Address.ToString());
+        //        //System.Diagnostics.Debug.WriteLine("RoundTrip time: {0}", reply.RoundtripTime);
+        //        //System.Diagnostics.Debug.WriteLine("Time to live: {0}", reply.Options.Ttl);
+        //        //System.Diagnostics.Debug.WriteLine("Don't fragment: {0}", reply.Options.DontFragment);
+        //        //System.Diagnostics.Debug.WriteLine("Buffer size: {0}", reply.Buffer.Length);
+        //        return reply.RoundtripTime;
+        //    } 
+        //    else
+        //    {
+        //        return 10;
+        //    }
+        //}
 
         public static void WriteTextFile(string fPath, string line)
         {

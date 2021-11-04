@@ -34,7 +34,7 @@ namespace AquaLogic_wpf
         }
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
-            RestartSocket();
+            RestartUART();
         }
 
          // Socket Control
@@ -42,7 +42,7 @@ namespace AquaLogic_wpf
         private BackgroundWorker _backgroundWorker;
         private SocketProcess _socketProcess;
 
-        private void RestartSocket()
+        private void RestartUART()
         {
             _backgroundWorker.CancelAsync();
             System.Threading.Thread.Sleep(125);
