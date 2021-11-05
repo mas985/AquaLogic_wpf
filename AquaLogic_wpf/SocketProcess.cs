@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-using System.Threading;
 using System.IO;
-using System.Net.NetworkInformation;
-using System.Text;
 
 namespace AquaLogic_wpf
 {
@@ -268,7 +265,7 @@ namespace AquaLogic_wpf
                     }
                     else if (bytes.SequenceEqual(kaBytes))
                     {
-                         System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
+                         //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
                     }
                     else if (bytes.Length > 6)
                     {
