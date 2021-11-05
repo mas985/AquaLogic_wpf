@@ -84,6 +84,7 @@ namespace AquaLogic_wpf
             public States Status { get; set; }
             public States Blink { get; set; }
             public string LogText { get; set; }
+            public bool Valid { get; set; }
         }
         private bool _menu_locked;
 
@@ -288,10 +289,12 @@ namespace AquaLogic_wpf
                             {
                                 socketData.Status = (States)BitConverter.ToInt32(bytes, 4);
                                 socketData.Blink = (States)BitConverter.ToInt32(bytes, 8);
+                                socketData.Valid = true;
                             }
                             else if (bytes[2] == 0x01 && bytes[3] == 0x03) // Display
                             {
                                 socketData.DisplayText = Byte2string(bytes, 4, bytes.Length - 9);
+                                socketData.Valid = true;
                                 if (socketData.DisplayText.Contains("Air Temp"))
                                 {
                                     _airT = GetTemp(socketData.DisplayText);
@@ -302,7 +305,7 @@ namespace AquaLogic_wpf
                                     _poolT = GetTemp(socketData.DisplayText);
                                 }
                                 _menu_locked = socketData.DisplayText.Contains("Menu-Locked");
-                            }
+                             }
                             else if (bytes[2] == 0x00 && bytes[3] == 0x02)
                             {
                                 //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));

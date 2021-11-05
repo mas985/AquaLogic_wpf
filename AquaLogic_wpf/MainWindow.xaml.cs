@@ -88,7 +88,7 @@ namespace AquaLogic_wpf
                 System.Threading.Thread.Sleep(50);
                 SocketProcess.SocketData socketData = _socketProcess.Update();
 
-                if (socketData.DisplayText != null)
+                if (socketData.Valid)
                 {
                     _backgroundWorker.ReportProgress(0, socketData);
                 }
