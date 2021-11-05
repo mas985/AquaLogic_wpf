@@ -121,15 +121,15 @@
                     <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="10" Grid.Column="1" ToolTip="Minutes"/>
 
                     <Label x:Name="Label1" Content="IP Address:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150"/>
-                    <Label x:Name="Label2" Content="Port #:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="1"/>
-                    <Label x:Name="Label3" Content="Aux1:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="2"/>
-                    <Label x:Name="Label4" Content="Aux2:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="3"/>
-                    <Label x:Name="Label5" Content="Aux3:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="5"/>
-                    <Label x:Name="Label6" Content="Aux4:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="4"/>
-                    <Label x:Name="Label7" Content="Aux5:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="6"/>
-                    <Label x:Name="Label8" Content="Aux6:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="7"/>
-                    <Label x:Name="Label9" Content="Valve3:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="8"/>
-                    <Label x:Name="Label10" Content="Valve4:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="9"/>
+                    <Label x:Name="Label2" Content="Port Number:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="1"/>
+                    <Label x:Name="Label3" Content="Aux1 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="2"/>
+                    <Label x:Name="Label4" Content="Aux2 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="3"/>
+                    <Label x:Name="Label5" Content="Aux3 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="5"/>
+                    <Label x:Name="Label6" Content="Aux4 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="4"/>
+                    <Label x:Name="Label7" Content="Aux5 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="6"/>
+                    <Label x:Name="Label8" Content="Aux6 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="7"/>
+                    <Label x:Name="Label9" Content="Valve3 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="8"/>
+                    <Label x:Name="Label10" Content="Valve4 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="9"/>
                     <Label x:Name="Label11" Content="Log Interval:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="10"/>
 
                 </Grid>
