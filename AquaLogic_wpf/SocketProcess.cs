@@ -164,22 +164,17 @@ namespace AquaLogic_wpf
             };
         }
 
-        long _lastKey = 0;
-        public void QueueKey(string key)
+         public void QueueKey(string key)
         {
-            if (DateTime.Now.Ticks > _lastKey + 35000000) // 3.5 sec delay after unlock key
+            if (_menu_locked && key == "RightBtn")
             {
-                if (_menu_locked && key == "RightBtn")
-                {
-                    SendKey("LRBtn");
-                    _lastKey = DateTime.Now.Ticks;
-                }
-                else
-                {
-                    SendKey(key);
-                }
+                SendKey("LRBtn");
             }
-        }
+            else
+            {
+                SendKey(key);
+            }
+         }
 
         private void SendKey(string key)
         {
