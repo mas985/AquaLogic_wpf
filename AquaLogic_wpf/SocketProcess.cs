@@ -162,17 +162,22 @@ namespace AquaLogic_wpf
             };
         }
 
+        long _lastKey = 0;
          public void QueueKey(string key)
         {
-            if (_menu_locked && key == "RightBtn")
+            if (DateTime.Now.Ticks  > _lastKey + 1000000)  // 100 ms max separation
             {
-                SendKey("LRBtn");
+                if (_menu_locked && key == "RightBtn")
+                {
+                    SendKey("LRBtn");
+                }
+                else
+                {
+                    SendKey(key);
+                }
+                _lastKey = DateTime.Now.Ticks;
             }
-            else
-            {
-                SendKey(key);
-            }
-         }
+        }
 
         private void SendKey(string key)
         {
@@ -229,7 +234,7 @@ namespace AquaLogic_wpf
                 {
                     loop++;
                     List<byte> recData = new();
-
+                   
                     byte pByte = 0;
                     byte aByte = 0;
                     recData.Clear();
@@ -238,7 +243,7 @@ namespace AquaLogic_wpf
 
                     _lTick = _cTick;
                     _cTick = DateTime.Now.Ticks;
-                    while (_tcpClient.Available > 0)
+                    while (true)  // (_tcpClient.Available > 0)
                     {
                         pByte = aByte;
                         aByte = (byte)_netStream.ReadByte();
