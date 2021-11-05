@@ -167,7 +167,7 @@ namespace AquaLogic_wpf
         long _lastKey = 0;
         public void QueueKey(string key)
         {
-            if (DateTime.Now.Ticks > _lastKey + 350000000) // 3.5 sec delay after unlock key
+            if (DateTime.Now.Ticks > _lastKey + 35000000) // 3.5 sec delay after unlock key
             {
                 if (_menu_locked && key == "RightBtn")
                 {
@@ -212,11 +212,10 @@ namespace AquaLogic_wpf
 
                 System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}", key, BitConverter.ToString(queData.ToArray())));
                
-                // Send keys
+                // Send key
 
                 _netStream.Write(queData.ToArray(), 0, queData.Count);
-                //System.Diagnostics.Debug.WriteLine(dt);
-
+ 
             }
             catch (Exception e)
             {
