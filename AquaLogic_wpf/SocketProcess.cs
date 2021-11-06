@@ -239,7 +239,7 @@ namespace AquaLogic_wpf
 
                     _lTick = _cTick;
                     _cTick = DateTime.Now.Ticks;
-                    while (true)  // (_tcpClient.Available > 0)
+                    while (_tcpClient.Available > 0)
                     {
                         pByte = aByte;
                         aByte = (byte)_netStream.ReadByte();
