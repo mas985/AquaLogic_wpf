@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.IO;
+using System.Threading;
 
 namespace AquaLogic_wpf
 {
@@ -161,22 +162,17 @@ namespace AquaLogic_wpf
                 _ => 0,
             };
         }
-
-        long _lastKey = 0;
-         public void QueueKey(string key)
+          public void QueueKey(string key)
         {
-            if (DateTime.Now.Ticks  > _lastKey + 1000000)  // 100 ms max separation
+            if (_menu_locked && key == "RightBtn")
             {
-                if (_menu_locked && key == "RightBtn")
-                {
-                    SendKey("LRBtn");
-                }
-                else
-                {
-                    SendKey(key);
-                }
-                _lastKey = DateTime.Now.Ticks;
+                SendKey("LRBtn");
             }
+            else
+            {
+                SendKey(key);
+            }
+            Thread.Sleep(100); // Delay for processing key
         }
 
         private void SendKey(string key)
