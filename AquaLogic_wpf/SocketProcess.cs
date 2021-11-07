@@ -366,10 +366,10 @@ namespace AquaLogic_wpf
                     }
                     bStr += cc.ToString();
                 }
-            }
-            string str = tStr.Trim() + "\n" + bStr.Trim();
-            if (str.Contains('[') && !str.Contains(']')) { str += "]"; }
-            return str.Replace("_","°").Trim();
+             }
+             if (bStr.Contains('[') && !bStr.Contains(']')) { bStr += "]"; }
+             string str = tStr.Trim() + "\n" + bStr.Trim();
+             return str.Replace("_","°").Trim();
         }
 
         //public long PingUART()
