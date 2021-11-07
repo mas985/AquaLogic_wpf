@@ -338,33 +338,40 @@ namespace AquaLogic_wpf
         }
         private static string Byte2string(byte[] bytes, int istr, int slen)
         {
-            string str = "";
-            int isplt = istr + slen / 2 - 1;
-            string lc;
+            string tStr = "";
+            string bStr = "";
             string cc = " ";
-            for (int i = istr; i < istr + slen - 1; i++)
+            int isplt = istr + slen / 2;
+             for (int i = istr; i < istr + slen - 1; i++)
             {
-                lc = cc;
                 if (bytes[i] == 0) { break; }
                 cc = bytes[i] < 128 ? Convert.ToChar(bytes[i]).ToString() : Convert.ToChar(bytes[i] - 128).ToString();
-                if (i > isplt && bytes[i] != 186 && bytes[i - 1] != 186)
+                
+                if (i < isplt)
                 {
-                    if (bytes[i] > 127 && bytes[i - 1] < 128)
-                    {
-                        str += "[";
-                    }
-                    else if (bytes[i] < 128 && bytes[i - 1] > 127)
-                    {
-                        str += "]";
-                    }
+                    tStr += cc.ToString();
                 }
-
-                if (lc != " " || cc != " ") { str += cc.ToString(); }
-                if (i == isplt) { str = str.Trim() + "\n"; }
+                else
+                {
+                    if (bytes[i] != 186 && bytes[i - 1] != 186)
+                    {
+                        if (bytes[i] > 127 && bytes[i - 1] < 128)
+                        {
+                            bStr += "[";
+                        }
+                        else if (bytes[i] < 128 && bytes[i - 1] > 127)
+                        {
+                            bStr += "]";
+                        }
+                    }
+                    bStr += cc.ToString();
+                }
             }
+            string str = tStr.Trim() + "\n" + bStr.Trim();
             if (str.Contains('[') && !str.Contains(']')) { str += "]"; }
             return str.Replace("_","°").Trim();
         }
+
         //public long PingUART()
         //{
         //    Ping pingSender = new Ping();
