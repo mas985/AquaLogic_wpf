@@ -30,7 +30,10 @@ namespace AquaLogic_wpf
          private void Button_Click(object sender, RoutedEventArgs e)
         {
              Button button = (Button)sender;
-            _socketProcess.QueueKey(button.Name);
+            if (_socketProcess.QueueKey(button.Name))
+            {
+                textDisplay.Text = "Please Wait...";
+            }
         }
         private void Restart_Click(object sender, RoutedEventArgs e)
         {

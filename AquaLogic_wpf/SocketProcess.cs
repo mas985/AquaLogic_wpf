@@ -162,17 +162,18 @@ namespace AquaLogic_wpf
                 _ => 0,
             };
         }
-          public void QueueKey(string key)
+          public bool QueueKey(string key)
         {
             if (_menu_locked && key == "RightBtn")
             {
                 SendKey("LRBtn");
+                return true;
             }
             else
             {
                 SendKey(key);
+                return false;
             }
-            Thread.Sleep(100); // Delay for processing key
         }
 
         private void SendKey(string key)
