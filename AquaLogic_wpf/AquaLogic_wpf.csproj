@@ -13,7 +13,7 @@
     <Authors>Mark Schulz</Authors>
     <Company>MAS Consulting</Company>
     <Description>Communcates with an AquaLogic controller</Description>
-    <Version>1.0.3-beta</Version>
+    <Version>1.0.3.0</Version>
     <TargetFramework>net5.0-windows</TargetFramework>
   </PropertyGroup>
 

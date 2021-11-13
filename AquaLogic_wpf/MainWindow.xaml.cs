@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace AquaLogic_wpf
 {
@@ -14,6 +15,7 @@ namespace AquaLogic_wpf
         {
 
             InitializeComponent();
+            Title = "AquaLogic PS8 - " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " beta";
 
             InitializeSocketProcess();
 
