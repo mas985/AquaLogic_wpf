@@ -107,8 +107,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="ipAddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150"  Grid.Column="1" ToolTip="RESET After Change"/>
-                    <TextBox x:Name="portNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="1" Grid.Column="1" ToolTip="RESET After Change"/>
+                    <TextBox x:Name="ipAddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150"  Grid.Column="1" ToolTip="Restart After Change"/>
+                    <TextBox x:Name="portNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="1" Grid.Column="1" ToolTip="Restart After Change"/>
 
                     <TextBox x:Name="Aux1_Edit" Text="{Binding Aux1, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Column="1" Grid.Row="2"/>
                     <TextBox x:Name="Aux2_Edit" Text="{Binding Aux2, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="3" Grid.Column="1"/>

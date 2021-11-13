@@ -84,6 +84,12 @@ namespace AquaLogic_wpf
             public string LogText { get; set; }
             public bool Valid { get; set; }
         }
+
+        public bool Connected
+        {
+            get { return _tcpClient.Connected; } 
+        }
+
         private bool _menu_locked;
 
         private readonly TcpClient _tcpClient;
@@ -106,7 +112,7 @@ namespace AquaLogic_wpf
         {
             try
             {
-                _tcpClient = new(ipAddr, portNum);
+                _tcpClient = new(ipAddr.Trim(), portNum);
                 _tcpClient.NoDelay = true;
                 _tcpClient.ReceiveTimeout = 5000;
                 _tcpClient.SendTimeout = 1000;
@@ -164,7 +170,7 @@ namespace AquaLogic_wpf
         }
           public bool QueueKey(string key)
         {
-            if (_menu_locked && key == "RightBtn")
+             if (_menu_locked && key == "RightBtn")
             {
                 SendKey("LRBtn");
                 return true;
@@ -172,6 +178,7 @@ namespace AquaLogic_wpf
             else
             {
                 SendKey(key);
+                Thread.Sleep(200);
                 return false;
             }
         }
@@ -271,7 +278,7 @@ namespace AquaLogic_wpf
                     }
                     else if (bytes.Length > 6)
                     {
-                        //System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
+                        System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}  {2}", (_cTick - _lTick) / 10000, loop, BitConverter.ToString(bytes)));
 
                         // Calculate CRC
 

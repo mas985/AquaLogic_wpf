@@ -60,9 +60,16 @@ namespace AquaLogic_wpf
         {
             _socketProcess = new(Properties.Settings.Default.ipAddr, Properties.Settings.Default.portNum);
 
-            InitializeBackgroundWorker();
+            if (_socketProcess.Connected)
+            {
+                InitializeBackgroundWorker();
 
-            _backgroundWorker.RunWorkerAsync();
+                _backgroundWorker.RunWorkerAsync();
+            }
+            else
+            {
+                textDisplay.Text = "Connection\nError";
+            }
         }
 
         // Background Worker
@@ -88,6 +95,7 @@ namespace AquaLogic_wpf
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            int vCnt = 0;
             while (!_backgroundWorker.CancellationPending)
             {
                 System.Threading.Thread.Sleep(100);
@@ -96,6 +104,17 @@ namespace AquaLogic_wpf
                 if (socketData.Valid)
                 {
                     _backgroundWorker.ReportProgress(0, socketData);
+                    vCnt = 0;
+                }
+                else
+                {
+                    vCnt += 1;
+                    if (vCnt > 100)
+                    {
+                        socketData.DisplayText = "Communication\nError";
+                        _backgroundWorker.ReportProgress(0, socketData);
+                        vCnt = 0;
+                    }
                 }
             }
          }
