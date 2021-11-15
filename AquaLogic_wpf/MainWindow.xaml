@@ -23,7 +23,7 @@
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="textDisplay" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0,0,0,0" Background="#FFB9D1EA" AcceptsReturn="True" MaxLines="2" TextAlignment="Center" FontSize="24" IsReadOnly="True" Cursor="None" ToolTip="RESET When Frozen"/>
+                <TextBox x:Name="textDisplay" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0,0,0,0" Background="#FFB9D1EA" AcceptsReturn="True" MaxLines="2" TextAlignment="Center" FontSize="24" IsReadOnly="True" Cursor="None" ToolTip="Restart When Frozen"/>
  
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
                     <Grid.ColumnDefinitions>
