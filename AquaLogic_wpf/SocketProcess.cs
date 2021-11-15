@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
+using System.Net.NetworkInformation;
 
 namespace AquaLogic_wpf
 {
@@ -87,7 +88,17 @@ namespace AquaLogic_wpf
 
         public bool Connected
         {
-            get { return _tcpClient.Connected; } 
+            get
+            {
+                if (_tcpClient != null)
+                {
+                    return _tcpClient.Connected;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         private bool _menu_locked;
@@ -112,13 +123,15 @@ namespace AquaLogic_wpf
         {
             try
             {
-                _tcpClient = new(ipAddr.Trim(), portNum);
-                _tcpClient.NoDelay = true;
-                _tcpClient.ReceiveTimeout = 5000;
-                _tcpClient.SendTimeout = 1000;
-
-                _netStream = _tcpClient.GetStream();
-             }
+                if (PingUART(ipAddr) > 0)
+                {
+                    _tcpClient = new(ipAddr.Trim(), portNum);
+                    _tcpClient.NoDelay = true;
+                    _tcpClient.ReceiveTimeout = 5000;
+                    _tcpClient.SendTimeout = 1000;
+                    _netStream = _tcpClient.GetStream();
+                }
+            }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
@@ -187,37 +200,39 @@ namespace AquaLogic_wpf
         {
             try
             {
-                List<byte> queData = new();
-
-                Keys bKey = GetKey(key);
-
-                queData.Add(_FRAME_DLE);
-                queData.Add(_FRAME_STX);
-                queData.Add(0x00);
-
-                queData.Add(_WIRED_LOCAL_KEY_EVENT);
-                byte[] aBytes = BitConverter.GetBytes((int)bKey);
-                queData.AddRange(aBytes.ToList());
-                queData.AddRange(aBytes.ToList());
- 
-                short crc = 0;
-                foreach (byte aB in queData) { crc += aB; }
-                queData.AddRange(BitConverter.GetBytes(crc).Reverse().ToArray());
-
-                for (int i = queData.Count - 1; i > 1; i--)
+                if (_netStream != null)
                 {
-                    if (queData[i] == 0x10) { queData.Insert(i + 1, 0x00); }
+                    List<byte> queData = new();
+
+                    Keys bKey = GetKey(key);
+
+                    queData.Add(_FRAME_DLE);
+                    queData.Add(_FRAME_STX);
+                    queData.Add(0x00);
+
+                    queData.Add(_WIRED_LOCAL_KEY_EVENT);
+                    byte[] aBytes = BitConverter.GetBytes((int)bKey);
+                    queData.AddRange(aBytes.ToList());
+                    queData.AddRange(aBytes.ToList());
+
+                    short crc = 0;
+                    foreach (byte aB in queData) { crc += aB; }
+                    queData.AddRange(BitConverter.GetBytes(crc).Reverse().ToArray());
+
+                    for (int i = queData.Count - 1; i > 1; i--)
+                    {
+                        if (queData[i] == 0x10) { queData.Insert(i + 1, 0x00); }
+                    }
+
+                    queData.Add(_FRAME_DLE);
+                    queData.Add(_FRAME_ETX);
+
+                    System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}", key, BitConverter.ToString(queData.ToArray())));
+
+                    // Send key
+
+                    _netStream.Write(queData.ToArray(), 0, queData.Count);
                 }
-
-                queData.Add(_FRAME_DLE);
-                queData.Add(_FRAME_ETX);
-
-                System.Diagnostics.Debug.WriteLine(string.Format("{0,10}    {1}", key, BitConverter.ToString(queData.ToArray())));
-               
-                // Send key
-
-                _netStream.Write(queData.ToArray(), 0, queData.Count);
- 
             }
             catch (Exception e)
             {
@@ -380,34 +395,30 @@ namespace AquaLogic_wpf
              return str.Replace("_","°").Trim();
         }
 
-        //public long PingUART()
-        //{
-        //    Ping pingSender = new Ping();
-        //    PingOptions options = new PingOptions();
+        public long PingUART(string ipAddr)
+        {
+            Ping pingSender = new Ping();
+            PingOptions options = new PingOptions();
+            options.DontFragment = true;
 
-        //    // Use the default Ttl value which is 128,
-        //    // but change the fragmentation behavior.
-        //    options.DontFragment = true;
-
-        //    // Create a buffer of 32 bytes of data to be transmitted.
-        //    string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-        //    byte[] buffer = Encoding.ASCII.GetBytes(data);
-        //    int timeout = 120;
-        //    PingReply reply = pingSender.Send(_ipaddr, timeout, buffer, options);
-        //    if (reply.Status == IPStatus.Success)
-        //    {
-        //        //System.Diagnostics.Debug.WriteLine("Address: {0}", reply.Address.ToString());
-        //        //System.Diagnostics.Debug.WriteLine("RoundTrip time: {0}", reply.RoundtripTime);
-        //        //System.Diagnostics.Debug.WriteLine("Time to live: {0}", reply.Options.Ttl);
-        //        //System.Diagnostics.Debug.WriteLine("Don't fragment: {0}", reply.Options.DontFragment);
-        //        //System.Diagnostics.Debug.WriteLine("Buffer size: {0}", reply.Buffer.Length);
-        //        return reply.RoundtripTime;
-        //    } 
-        //    else
-        //    {
-        //        return 10;
-        //    }
-        //}
+            // Create a buffer of 16 bytes of data to be transmitted.
+             byte[] buffer = new byte[] { 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50 };
+            int timeout = 120;
+            PingReply reply = pingSender.Send(ipAddr, timeout, buffer, options);
+            if (reply.Status == IPStatus.Success)
+            {
+                //System.Diagnostics.Debug.WriteLine("Address: {0}", reply.Address.ToString());
+                //System.Diagnostics.Debug.WriteLine("RoundTrip time: {0}", reply.RoundtripTime);
+                //System.Diagnostics.Debug.WriteLine("Time to live: {0}", reply.Options.Ttl);
+                //System.Diagnostics.Debug.WriteLine("Don't fragment: {0}", reply.Options.DontFragment);
+                //System.Diagnostics.Debug.WriteLine("Buffer size: {0}", reply.Buffer.Length);
+                return reply.RoundtripTime;
+            }
+            else
+            {
+                return -1;
+            }
+        }
 
         public static void WriteTextFile(string fPath, string line)
         {

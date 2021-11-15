@@ -15,6 +15,7 @@ namespace AquaLogic_wpf
         {
 
             InitializeComponent();
+            
             Title = "AquaLogic PS8 - " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " beta";
 
             InitializeSocketProcess();
@@ -25,7 +26,10 @@ namespace AquaLogic_wpf
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            _backgroundWorker.CancelAsync();
+            if (_backgroundWorker != null)
+            {
+                _backgroundWorker.CancelAsync();
+            }
             Properties.Settings.Default.Save();
         }
  
@@ -49,10 +53,17 @@ namespace AquaLogic_wpf
 
         private void RestartUART()
         {
-            _backgroundWorker.CancelAsync();
-            System.Threading.Thread.Sleep(125);
-            _socketProcess.QueueKey("Reset");
-            System.Threading.Thread.Sleep(125);
+            if (_backgroundWorker != null)
+            {
+                _backgroundWorker.CancelAsync();
+                System.Threading.Thread.Sleep(125);
+            }
+            
+            if (_socketProcess != null)
+            {
+                _socketProcess.QueueKey("Reset");
+                System.Threading.Thread.Sleep(125);
+            }
             InitializeSocketProcess();
         }
 
