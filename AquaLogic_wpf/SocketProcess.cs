@@ -395,16 +395,10 @@ namespace AquaLogic_wpf
              return str.Replace("_","°").Trim();
         }
 
-        public long PingUART(string ipAddr)
+        public static long PingUART(string ipAddr)
         {
-            Ping pingSender = new Ping();
-            PingOptions options = new PingOptions();
-            options.DontFragment = true;
-
-            // Create a buffer of 16 bytes of data to be transmitted.
-             byte[] buffer = new byte[] { 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50, 0x50 };
-            int timeout = 120;
-            PingReply reply = pingSender.Send(ipAddr, timeout, buffer, options);
+            Ping pingSender = new();
+            PingReply reply = pingSender.Send(ipAddr);
             if (reply.Status == IPStatus.Success)
             {
                 //System.Diagnostics.Debug.WriteLine("Address: {0}", reply.Address.ToString());
