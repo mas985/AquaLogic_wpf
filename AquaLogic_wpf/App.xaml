@@ -4,6 +4,43 @@
              xmlns:local="clr-namespace:AquaLogic_wpf"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+
+            <!--<Color x:Key="EntryColor">Ivory</Color>-->
+
+            <!--<Setter Property="TextColor" Value="Black" />
+            <Setter Property="BackgroundColor" Value="#FFB9D1EA" />-->
+            <!--<Setter Property="FontFamily" Value="OpenSansRegular" />-->
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Margin" Value="2" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+            </Style>
+
+            <!--<Setter Property="TextColor" Value="Black" />
+            <Setter Property="BackgroundColor" Value="Ivory" />-->
+            <!--<Setter Property="FontFamily" Value="OpenSansRegular" />-->
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Margin" Value="2" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+            </Style>
+
+            <!--<Setter Property="TextColor" Value="Black" />
+            <Setter Property="BackgroundColor" Value="Grey" />
+            <Setter Property="BorderColor" Value="Black" />-->
+            <!--<Setter Property="FontFamily" Value="OpenSansRegular" />-->
+            <!--<Setter Property="BorderThickness" Value="5" />-->
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="Margin" Value="2" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+            </Style>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

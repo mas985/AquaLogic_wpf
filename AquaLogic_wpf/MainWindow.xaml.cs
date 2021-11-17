@@ -38,7 +38,7 @@ namespace AquaLogic_wpf
              Button button = (Button)sender;
             if (_socketProcess.QueueKey(button.Name))
             {
-                textDisplay.Text = "Please Wait...";
+                TextDisplay.Text = "Please Wait...";
             }
         }
         private void Restart_Click(object sender, RoutedEventArgs e)
@@ -79,7 +79,7 @@ namespace AquaLogic_wpf
             }
             else
             {
-                textDisplay.Text = "Connection\nError";
+                TextDisplay.Text = "Connection\nError";
             }
         }
 
@@ -150,7 +150,7 @@ namespace AquaLogic_wpf
         {
             if (socketData.DisplayText != null)
             {
-                textDisplay.Text = socketData.DisplayText;
+                TextDisplay.Text = socketData.DisplayText;
             }
 
             if (socketData.Status != 0)

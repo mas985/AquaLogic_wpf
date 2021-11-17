@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 using System.Net.NetworkInformation;
+using System.Net;
 
 namespace AquaLogic_wpf
 {
@@ -398,7 +399,7 @@ namespace AquaLogic_wpf
         public static long PingUART(string ipAddr)
         {
             Ping pingSender = new();
-            PingReply reply = pingSender.Send(ipAddr);
+            PingReply reply = pingSender.Send(IPAddress.Parse(ipAddr));
             if (reply.Status == IPStatus.Success)
             {
                 //System.Diagnostics.Debug.WriteLine("Address: {0}", reply.Address.ToString());

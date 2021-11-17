@@ -23,23 +23,38 @@
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="textDisplay" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0,0,0,0" Background="#FFB9D1EA" AcceptsReturn="True" MaxLines="2" TextAlignment="Center" FontSize="24" IsReadOnly="True" Cursor="None" ToolTip="Restart When Frozen"/>
+                <TextBox x:Name="TextDisplay" MaxLines="2" TextAlignment="Center" FontSize="24" IsReadOnly="True" Cursor="None" ToolTip="Restart When Frozen" Background="Transparent"/>
  
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Button x:Name="MenuBtn" Content="Menu" VerticalAlignment="Center" FontSize="24" Click="Button_Click" Width="100" Height="70" Grid.Column="1"/>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Button x:Name="PlusBtn" Content="+" FontSize="36" Click="Button_Click" Grid.Row="0"/>
+                        <Button x:Name="MenuBtn" Content="Menu"  FontSize="24"  Click="Button_Click"  Grid.Row="1"/>
+                        <Button x:Name="MinusBtn" Content="-" FontSize="36" Click="Button_Click" Grid.Row="2"/>
+                    </Grid>
+
+                    <Button x:Name="LeftBtn" Content="&lt;" FontSize="36" Click="Button_Click" />
+                    <Button x:Name="RightBtn" Content="&gt;" FontSize="36" Click="Button_Click" Grid.Column="2"/>
+                    
+                    <!--<Button x:Name="MenuBtn" Content="Menu" VerticalAlignment="Center" FontSize="24" Click="Button_Click" Width="100" Height="70" Grid.Column="1"/>
                     <Button x:Name="PlusBtn" Content="+" VerticalAlignment="Top" FontSize="36" Click="Button_Click" Width="100" Height="50" Grid.Column="1"/>
                     <Button x:Name="MinusBtn" Content="-" VerticalAlignment="Bottom" FontSize="36" Click="Button_Click" Width="100" Height="50" Grid.Column="1"/>
                     <Button x:Name="LeftBtn" Content="&lt;" FontSize="36" Click="Button_Click" Width="50" Height="170"/>
-                    <Button x:Name="RightBtn" Content="&gt;" FontSize="36" Click="Button_Click" Width="50" Height="170" Grid.Column="2"/>
+                    <Button x:Name="RightBtn" Content="&gt;" FontSize="36" Click="Button_Click" Width="50" Height="170" Grid.Column="2"/>-->
                 </Grid>
 
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2">
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -54,25 +69,26 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Button x:Name="Pool" Content="Pool" FontSize="20" Click="Button_Click" Width="150" Height="35"/>
-                    <Button x:Name="Spa" Content="Spa" FontSize="20" Click="Button_Click" Width="150" Grid.Row="1" Height="35"/>
-                    <Button x:Name="Spillover" Content="Spillover" FontSize="20" Click="Button_Click" Width="150" Grid.Row="2" Height="35"/>
-                    <Button x:Name="Filter" Content="Filter" FontSize="20" Click="Button_Click" Width="150" Grid.Row="3" Height="35"/>
-                    <Button x:Name="Lights" Content="Lights" FontSize="20" Click="Button_Click" Width="150" Grid.Row="4" Height="35"/>
-                    <Button x:Name="Heater1" Content="Heater1" FontSize="20" Click="Button_Click" Width="150" Grid.Row="5" Height="35"/>
+                    <Button x:Name="Pool" Content="Pool" Click="Button_Click"/>
+                    <Button x:Name="Spa" Content="Spa" Click="Button_Click" Grid.Row="1"/>
+                    <Button x:Name="Spillover" Content="Spillover" Click="Button_Click" Grid.Row="2"/>
+                    <Button x:Name="Filter" Content="Filter" Click="Button_Click" Grid.Row="3"/>
+                    <Button x:Name="Lights" Content="Lights" Click="Button_Click" Grid.Row="4"/>
+                    <Button x:Name="Heater1" Content="Heater1" Click="Button_Click" Grid.Row="5"/>
 
-                    <Button x:Name="Valve3" Content="{Binding Valve3, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="6" Height="35"/>
-                    <Button x:Name="Valve4" Content="{Binding Valve4, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="6" Grid.Column="1" Height="35"/>
+                    <Button x:Name="Valve3" Content="{Binding Valve3, Source={x:Static local:Settings.Default}}" Click="Button_Click" Grid.Row="6"/>
+                    <Button x:Name="Valve4" Content="{Binding Valve4, Source={x:Static local:Settings.Default}}" Click="Button_Click" Grid.Row="6" Grid.Column="1"/>
 
-                    <Button x:Name="Aux1" Content="{Binding Aux1, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Column="1" Height="35"/>
-                    <Button x:Name="Aux2" Content="{Binding Aux2, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="1" Grid.Column="1" Height="35"/>
-                    <Button x:Name="Aux3" Content="{Binding Aux3, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="2" Grid.Column="1" Height="35"/>
-                    <Button x:Name="Aux4" Content="{Binding Aux4, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="3" Grid.Column="1" Height="35"/>
-                    <Button x:Name="Aux5" Content="{Binding Aux5, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="4" Grid.Column="1" Height="35"/>
-                    <Button x:Name="Aux6" Content="{Binding Aux6, Source={x:Static local:Settings.Default}}" FontSize="20" Click="Button_Click" Width="150" Grid.Row="5" Grid.Column="1" Height="35"/>
+                    <Button x:Name="Aux1" Content="{Binding Aux1, Source={x:Static local:Settings.Default}}" Click="Button_Click" Grid.Column="1"/>
+                    <Button x:Name="Aux2" Content="{Binding Aux2, Source={x:Static local:Settings.Default}}" Click="Button_Click" Grid.Row="1" Grid.Column="1"/>
+                    <Button x:Name="Aux3" Content="{Binding Aux3, Source={x:Static local:Settings.Default}}" Click="Button_Click" Grid.Row="2" Grid.Column="1"/>
+                    <Button x:Name="Aux4" Content="{Binding Aux4, Source={x:Static local:Settings.Default}}" Click="Button_Click" Grid.Row="3" Grid.Column="1"/>
+                    <Button x:Name="Aux5" Content="{Binding Aux5, Source={x:Static local:Settings.Default}}" Click="Button_Click" Grid.Row="4" Grid.Column="1"/>
+                    <Button x:Name="Aux6" Content="{Binding Aux6, Source={x:Static local:Settings.Default}}" Click="Button_Click" Grid.Row="5" Grid.Column="1"/>
                 </Grid>
             </Grid>
         </TabItem>
+        
         <TabItem Header="Settings" FontSize="16">
             <TabItem.Background>
                 <LinearGradientBrush EndPoint="0,1">
@@ -88,7 +104,7 @@
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
 
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="3">
+                <Grid Grid.Row="1" Grid.Column="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -107,34 +123,34 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBox x:Name="ipAddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150"  Grid.Column="1" ToolTip="Restart After Change"/>
-                    <TextBox x:Name="portNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="1" Grid.Column="1" ToolTip="Restart After Change"/>
+                    <TextBox x:Name="ipAddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Column="1" ToolTip="Restart After Change"/>
+                    <TextBox x:Name="portNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="1" Grid.Column="1" ToolTip="Restart After Change"/>
 
-                    <TextBox x:Name="Aux1_Edit" Text="{Binding Aux1, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Column="1" Grid.Row="2"/>
-                    <TextBox x:Name="Aux2_Edit" Text="{Binding Aux2, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="3" Grid.Column="1"/>
-                    <TextBox x:Name="Aux3_Edit" Text="{Binding Aux3, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="4" Grid.Column="3"/>
-                    <TextBox x:Name="Aux4_Edit" Text="{Binding Aux4, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="5" Grid.Column="1"/>
-                    <TextBox x:Name="Aux5_Edit" Text="{Binding Aux5, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="6" Grid.Column="1"/>
-                    <TextBox x:Name="Aux6_Edit" Text="{Binding Aux6, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="7" Grid.Column="1"/>
-                    <TextBox x:Name="Valve3_Edit" Text="{Binding Valve3, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="8" Grid.Column="1"/>
-                    <TextBox x:Name="Valve4_Edit" Text="{Binding Valve4, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="9" Grid.Column="1"/>
-                    <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" FontSize="20" Padding="5,0,0,0" MaxLines="1" FontWeight="Normal" Height="35" Width="150" Grid.Row="10" Grid.Column="1" ToolTip="Minutes"/>
+                    <TextBox x:Name="Aux1_Edit" Text="{Binding Aux1, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Column="1" Grid.Row="2"/>
+                    <TextBox x:Name="Aux2_Edit" Text="{Binding Aux2, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="3" Grid.Column="1"/>
+                    <TextBox x:Name="Aux3_Edit" Text="{Binding Aux3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="4" Grid.Column="3"/>
+                    <TextBox x:Name="Aux4_Edit" Text="{Binding Aux4, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="5" Grid.Column="1"/>
+                    <TextBox x:Name="Aux5_Edit" Text="{Binding Aux5, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="6" Grid.Column="1"/>
+                    <TextBox x:Name="Aux6_Edit" Text="{Binding Aux6, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="7" Grid.Column="1"/>
+                    <TextBox x:Name="Valve3_Edit" Text="{Binding Valve3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="8" Grid.Column="1"/>
+                    <TextBox x:Name="Valve4_Edit" Text="{Binding Valve4, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="9" Grid.Column="1"/>
+                    <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="10" Grid.Column="1" ToolTip="Minutes"/>
 
-                    <Label x:Name="Label1" Content="IP Address:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150"/>
-                    <Label x:Name="Label2" Content="Port Number:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="1"/>
-                    <Label x:Name="Label3" Content="Aux1 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="2"/>
-                    <Label x:Name="Label4" Content="Aux2 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="3"/>
-                    <Label x:Name="Label5" Content="Aux3 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="5"/>
-                    <Label x:Name="Label6" Content="Aux4 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="4"/>
-                    <Label x:Name="Label7" Content="Aux5 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="6"/>
-                    <Label x:Name="Label8" Content="Aux6 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="7"/>
-                    <Label x:Name="Label9" Content="Valve3 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="8"/>
-                    <Label x:Name="Label10" Content="Valve4 Label:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="9"/>
-                    <Label x:Name="Label11" Content="Log Interval:" FontSize="20" BorderThickness="0,0,0,0" Height="35" Width="150" Grid.Row="10"/>
+                    <Label x:Name="Label1" Content="IP Address:"/>
+                    <Label x:Name="Label2" Content="Port Number:" Grid.Row="1"/>
+                    <Label x:Name="Label3" Content="Aux1 Label:" Grid.Row="2"/>
+                    <Label x:Name="Label4" Content="Aux2 Label:" Grid.Row="3"/>
+                    <Label x:Name="Label5" Content="Aux3 Label:" Grid.Row="5"/>
+                    <Label x:Name="Label6" Content="Aux4 Label:" Grid.Row="4"/>
+                    <Label x:Name="Label7" Content="Aux5 Label:" Grid.Row="6"/>
+                    <Label x:Name="Label8" Content="Aux6 Label:" Grid.Row="7"/>
+                    <Label x:Name="Label9" Content="Valve3 Label:" Grid.Row="8"/>
+                    <Label x:Name="Label10" Content="Valve4 Label:" Grid.Row="9"/>
+                    <Label x:Name="Label11" Content="Log Interval:" Grid.Row="10"/>
 
                 </Grid>
 
-                <Button x:Name="Restart" Content="Restart" FontSize="24" Click="Restart_Click" Grid.Row="2" Height="60" Width="200"/>
+                <Button x:Name="Restart" Content="Restart" FontSize="24" Click="Restart_Click" Grid.Row="2"/>
                 <Label x:Name="label" Content="Settings" HorizontalAlignment="Center" FontSize="24"/>
 
             </Grid>
