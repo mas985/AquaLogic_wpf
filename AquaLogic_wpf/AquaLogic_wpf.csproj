@@ -3,33 +3,35 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Pool.ico</ApplicationIcon>
+    <ApplicationIcon>pool.ico</ApplicationIcon>
     <Win32Resource />
-    <AssemblyName>AquaLogic</AssemblyName>
+    <AssemblyName>AquaLogic_wpf</AssemblyName>
     <RootNamespace>AquaLogic_wpf</RootNamespace>
     <Copyright>MAS Consulting 2021</Copyright>
-    <PackageIcon>Pool.png</PackageIcon>
+    <PackageIcon>pool128.png</PackageIcon>
     <PackageIconUrl />
     <Authors>Mark Schulz</Authors>
     <Company>MAS Consulting</Company>
-    <Description>Communcates with an AquaLogic controller</Description>
-    <Version>1.0.3.3</Version>
+    <Description>AquaLogic PS8 Remote Emulator</Description>
     <TargetFramework>net5.0-windows</TargetFramework>
+
+	<ApplicationTitle>AquaLogic PS8</ApplicationTitle>
+	<Version>1.0.3.5</Version>
+	<Product>AquaLogic PS8</Product>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Pool.ico" />
-    <None Remove="Pool.png" />
+    <None Remove="pool.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Pool.ico">
+    <Content Include="pool.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Pool.png" />
+    <Content Include="pool128.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -51,15 +53,4 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
-  <ItemGroup>
-    <None Update="EW11_Script.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-
 </Project>

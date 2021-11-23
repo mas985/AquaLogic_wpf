@@ -4,108 +4,50 @@ using System.Windows.Controls;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Threading;
+using AquaLogic;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace AquaLogic_wpf
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-         public MainWindow()
+        public MainWindow()
         {
-
             InitializeComponent();
             
             Title = "AquaLogic PS8 - " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " beta";
 
-            InitializeSocketProcess();
-
+            InitializeBackgroundWorker();
         }
 
         // UI Events
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            if (_dispatcherTimer != null)
-            {
-                _dispatcherTimer.Stop();
-            }
             Properties.Settings.Default.Save();
         }
- 
+
+        string _key = "";
          private void Button_Click(object sender, RoutedEventArgs e)
         {
              Button button = (Button)sender;
-            if (_socketProcess.QueueKey(button.Name))
-            {
-                TextDisplay.Text = "Please Wait...";
-            }
+            _key = button.Name;
         }
+
+        string _ipAddr;
+        int _portNum;
+        bool _resetSocket;
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
-            RestartUART();
+            _ipAddr = ipAddr.Text;
+            _portNum = Int32.Parse(portNum.Text);
+            _resetSocket = true;
+
+            tabControl.SelectedIndex--;
         }
 
-         // Socket Control
-
-        private SocketProcess _socketProcess;
-        private DispatcherTimer _dispatcherTimer;
-
-        private void RestartUART()
-        {
-            if (_dispatcherTimer != null)
-            {
-                _dispatcherTimer.Stop();
-            }
-
-            if (_socketProcess != null)
-            {
-                _socketProcess.QueueKey("Reset");
-                System.Threading.Thread.Sleep(125);
-            }
-            InitializeSocketProcess();
-        }
-
-        private void InitializeSocketProcess()
-        {
-            _socketProcess = new(ipAddr.Text, Int32.Parse(portNum.Text));
-
-            if (_socketProcess.Connected)
-            {
-                _dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-                _dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
-                _dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
-                _dispatcherTimer.Start();
-            }
-            else
-            {
-                TextDisplay.Text = "Connection\nError";
-            }
-        }
-
-        int _vCnt = 0;
-        private void DispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            SocketProcess.SocketData socketData = _socketProcess.Update();
-
-            if (socketData.Valid)
-            {
-                UpdateDisplay(socketData);
-
-                _vCnt = 0;
-            }
-            else
-            {
-                _vCnt += 1;
-                if (_vCnt > 100)
-                {
-                    socketData.DisplayText = "Communication\nError";
-                    UpdateDisplay(socketData);
-                    _vCnt = 0;
-                }
-            }
-        }
+        // UI Updates
 
         private readonly string _logPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "AquaLogic.csv");
         private DateTime _lastLog = DateTime.Now;
@@ -144,6 +86,89 @@ namespace AquaLogic_wpf
         {
             button.FontWeight = status.HasFlag(state) ? FontWeights.Bold : FontWeights.Regular;
             button.FontStyle = blink.HasFlag(state) ? FontStyles.Italic : FontStyles.Normal;
+        }
+
+        // BackgroundWorker
+
+        readonly BackgroundWorker _backgroundWorker = new();
+        private void InitializeBackgroundWorker()
+        {
+            TextDisplay.Text = "Initializing";
+
+            _ipAddr = ipAddr.Text;
+            _portNum = Int32.Parse(portNum.Text);
+
+            _backgroundWorker.WorkerReportsProgress = true;
+            _backgroundWorker.WorkerSupportsCancellation = true;
+            _backgroundWorker.DoWork +=
+                new DoWorkEventHandler(BackgroundWorker_DoWork);
+            _backgroundWorker.RunWorkerCompleted +=
+                    new RunWorkerCompletedEventHandler(
+                BackgroundWorker_RunWorkerCompleted);
+            _backgroundWorker.ProgressChanged +=
+                    new ProgressChangedEventHandler(
+                BackgroundWorker_ProgressChanged);
+            _backgroundWorker.RunWorkerAsync();
+         }
+
+       private void BackgroundWorker_DoWork(object sender,
+            DoWorkEventArgs e)
+        {
+            int vCnt = 0;
+            SocketProcess socketProcess = new(_ipAddr, _portNum);
+            while (true)
+            {
+                if (_key != "")
+                {
+                    socketProcess.QueueKey(_key);
+                    _key = "";
+                }
+                else
+                {
+                    Thread.Sleep(100);
+                    SocketProcess.SocketData socketData = socketProcess.Update();
+
+                    if (socketData.Valid)
+                    {
+                        vCnt = 0;
+                        _backgroundWorker.ReportProgress(vCnt, socketData);
+                    }
+                    else if (vCnt == 50)
+                    {
+                        _backgroundWorker.ReportProgress(vCnt, socketData);
+                    }
+                    else if (vCnt == 300 || !socketProcess.Connected)
+                    {
+                        vCnt = 0;
+                        socketProcess.Reset(_ipAddr, _portNum);
+                    }
+                    else if (_resetSocket)
+                    {
+                        _resetSocket = false;
+                        socketProcess.QueueKey("Reset");
+                        socketProcess.Reset(_ipAddr, _portNum);
+                    }
+                    vCnt++;
+                }
+            }
+        }
+        private void BackgroundWorker_ProgressChanged(object sender,
+           ProgressChangedEventArgs e)
+        {
+            SocketProcess.SocketData socketData = (SocketProcess.SocketData)e.UserState;
+            if (socketData.Valid)
+            {
+                TextDisplay.FontStyle = FontStyles.Normal;
+                UpdateDisplay(socketData);
+            }
+            else
+            {
+                TextDisplay.FontStyle = FontStyles.Italic;
+            }
+        }
+        private void BackgroundWorker_RunWorkerCompleted(
+        object sender, RunWorkerCompletedEventArgs e)
+        {
         }
     }
 }

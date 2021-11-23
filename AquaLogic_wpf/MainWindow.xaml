@@ -5,24 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaLogic_wpf.Properties"
         mc:Ignorable="d"
-        Background="LightBlue"
-        Title="AquaLogic PS8 (beta)" FontSize="30" FontWeight="Bold" FontStyle="Normal" Closing="Window_Closing" Icon="/Pool.png" SizeToContent="Manual" MinHeight="640" MinWidth="360" Height="640" Width="360" ResizeMode="NoResize">
-    
-    <TabControl Background="LightBlue" x:Name="tabControl" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
-        <TabItem Header="AquaLogic" FontSize="16">
-            <TabItem.Background>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="#FFF0F0F0"/>
-                    <GradientStop Color="LightBlue" Offset="1"/>
-                </LinearGradientBrush>
-            </TabItem.Background>
+        Background="Black"
+        Title="AquaLogic PS8 (beta)" FontSize="30" FontWeight="Bold" FontStyle="Normal" Closing="Window_Closing" Icon="/pool.ico" SizeToContent="Manual" MinHeight="640" MinWidth="360" Height="640" Width="360" ResizeMode="NoResize">
+
+    <TabControl Background="Black" x:Name="tabControl" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
+        <TabItem Header="AquaLogic" Background="AliceBlue" FontSize="16">
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="TextDisplay" MaxLines="2" TextAlignment="Center" FontSize="24" IsReadOnly="True" Cursor="None" ToolTip="Restart When Frozen" Background="Transparent"/>
+                <TextBox x:Name="TextDisplay" MaxLines="2" TextAlignment="Center" FontSize="24" IsReadOnly="True" Cursor="None" ToolTip="Restart When Frozen"/>
  
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -87,16 +82,9 @@
                 </Grid>
             </Grid>
         </TabItem>
-        
-        <TabItem Header="Settings" FontSize="16">
-            <TabItem.Background>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="#FFF0F0F0"/>
-                    <GradientStop Color="#FFB9D1EA" Offset="1"/>
-                </LinearGradientBrush>
-            </TabItem.Background>
 
-            <Grid>
+        <TabItem Header="Settings" Background="AliceBlue" FontSize="16">
+             <Grid>
                 <Grid.RowDefinitions>
                    <RowDefinition Height="5*"/>
                     <RowDefinition/>
@@ -126,7 +114,7 @@
 
                     <TextBox x:Name="Aux1_Edit" Text="{Binding Aux1, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Column="1" Grid.Row="2"/>
                     <TextBox x:Name="Aux2_Edit" Text="{Binding Aux2, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="3" Grid.Column="1"/>
-                    <TextBox x:Name="Aux3_Edit" Text="{Binding Aux3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="4" Grid.Column="3"/>
+                    <TextBox x:Name="Aux3_Edit" Text="{Binding Aux3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="4" Grid.Column="1"/>
                     <TextBox x:Name="Aux4_Edit" Text="{Binding Aux4, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="5" Grid.Column="1"/>
                     <TextBox x:Name="Aux5_Edit" Text="{Binding Aux5, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="6" Grid.Column="1"/>
                     <TextBox x:Name="Aux6_Edit" Text="{Binding Aux6, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="7" Grid.Column="1"/>
@@ -138,8 +126,8 @@
                     <Label x:Name="Label2" Content="Port Number:" Grid.Row="1"/>
                     <Label x:Name="Label3" Content="Aux1 Label:" Grid.Row="2"/>
                     <Label x:Name="Label4" Content="Aux2 Label:" Grid.Row="3"/>
-                    <Label x:Name="Label5" Content="Aux3 Label:" Grid.Row="5"/>
-                    <Label x:Name="Label6" Content="Aux4 Label:" Grid.Row="4"/>
+                    <Label x:Name="Label5" Content="Aux3 Label:" Grid.Row="4"/>
+                    <Label x:Name="Label6" Content="Aux4 Label:" Grid.Row="5"/>
                     <Label x:Name="Label7" Content="Aux5 Label:" Grid.Row="6"/>
                     <Label x:Name="Label8" Content="Aux6 Label:" Grid.Row="7"/>
                     <Label x:Name="Label9" Content="Valve3 Label:" Grid.Row="8"/>
