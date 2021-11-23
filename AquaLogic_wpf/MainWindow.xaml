@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AquaLogic_wpf.Properties"
         mc:Ignorable="d"
-        Title="AquaLogic PS8 (beta)" FontSize="24" FontWeight="Bold" FontStyle="Normal" Closing="Window_Closing" Icon="/Pool.png" SizeToContent="Manual" MinHeight="640" MinWidth="360" Height="640" Width="360" ResizeMode="NoResize">
+        Background="LightBlue"
+        Title="AquaLogic PS8 (beta)" FontSize="30" FontWeight="Bold" FontStyle="Normal" Closing="Window_Closing" Icon="/Pool.png" SizeToContent="Manual" MinHeight="640" MinWidth="360" Height="640" Width="360" ResizeMode="NoResize">
+    
     <TabControl Background="LightBlue" x:Name="tabControl" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
         <TabItem Header="AquaLogic" FontSize="16">
             <TabItem.Background>
