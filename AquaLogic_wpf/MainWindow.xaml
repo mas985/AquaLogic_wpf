@@ -6,18 +6,15 @@
         xmlns:local="clr-namespace:AquaLogic_wpf.Properties"
         mc:Ignorable="d"
         Title="AquaLogic PS8 (beta)" FontSize="24" FontWeight="Bold" FontStyle="Normal" Closing="Window_Closing" Icon="/Pool.png" SizeToContent="Manual" MinHeight="640" MinWidth="360" Height="640" Width="360" ResizeMode="NoResize">
-    <!--<Window.Background>
-        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}"/>
-    </Window.Background>-->
-    <TabControl x:Name="tabControl" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
-        <TabItem Header="Main" FontSize="16">
+    <TabControl Background="LightBlue" x:Name="tabControl" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
+        <TabItem Header="AquaLogic" FontSize="16">
             <TabItem.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#FFF0F0F0"/>
-                    <GradientStop Color="#FFB9D1EA" Offset="1"/>
+                    <GradientStop Color="LightBlue" Offset="1"/>
                 </LinearGradientBrush>
             </TabItem.Background>
-            <Grid Background="#FFB9D1EA">
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="2*"/>
@@ -97,7 +94,7 @@
                 </LinearGradientBrush>
             </TabItem.Background>
 
-            <Grid Background="#FFB9D1EA">
+            <Grid>
                 <Grid.RowDefinitions>
                    <RowDefinition Height="5*"/>
                     <RowDefinition/>
