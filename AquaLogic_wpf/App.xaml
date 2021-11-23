@@ -13,7 +13,7 @@
             <!--<Setter Property="FontFamily" Value="OpenSansRegular" />-->
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="20" />
-                <Setter Property="Margin" Value="2" />
+                <Setter Property="Margin" Value="3" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
                 <Setter Property="VerticalAlignment" Value="Stretch" />
             </Style>
@@ -23,9 +23,10 @@
             <!--<Setter Property="FontFamily" Value="OpenSansRegular" />-->
             <Style TargetType="TextBox">
                 <Setter Property="FontSize" Value="20" />
-                <Setter Property="Margin" Value="2" />
+                <Setter Property="Margin" Value="3" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
                 <Setter Property="VerticalAlignment" Value="Stretch" />
+                <Setter Property="Padding" Value="3" />
             </Style>
 
             <!--<Setter Property="TextColor" Value="Black" />
@@ -36,7 +37,7 @@
             <Style TargetType="Button">
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="FontWeight" Value="Bold" />
-                <Setter Property="Margin" Value="2" />
+                <Setter Property="Margin" Value="3" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
                 <Setter Property="VerticalAlignment" Value="Stretch" />
             </Style>

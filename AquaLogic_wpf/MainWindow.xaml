@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:AquaLogic_wpf.Properties"
         mc:Ignorable="d"
         Title="AquaLogic PS8 (beta)" FontSize="24" FontWeight="Bold" FontStyle="Normal" Closing="Window_Closing" Icon="/Pool.png" SizeToContent="Manual" MinHeight="640" MinWidth="360" Height="640" Width="360" ResizeMode="NoResize">
-    <Window.Background>
+    <!--<Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.GradientActiveCaptionColorKey}}"/>
-    </Window.Background>
+    </Window.Background>-->
     <TabControl x:Name="tabControl" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
         <TabItem Header="Main" FontSize="16">
             <TabItem.Background>
@@ -28,7 +28,7 @@
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="2*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
@@ -99,12 +99,11 @@
 
             <Grid Background="#FFB9D1EA">
                 <Grid.RowDefinitions>
+                   <RowDefinition Height="5*"/>
                     <RowDefinition/>
-                    <RowDefinition Height="10*"/>
-                    <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="1" Grid.Column="3">
+                <Grid Grid.Column="3">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -150,8 +149,7 @@
 
                 </Grid>
 
-                <Button x:Name="Restart" Content="Restart" FontSize="24" Click="Restart_Click" Grid.Row="2"/>
-                <Label x:Name="label" Content="Settings" HorizontalAlignment="Center" FontSize="24"/>
+                <Button x:Name="Restart" Content="Restart" FontSize="24" Click="Restart_Click" Grid.Row="1"/>
 
             </Grid>
 

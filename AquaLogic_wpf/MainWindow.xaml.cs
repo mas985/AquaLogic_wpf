@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Reflection;
+using System.Windows.Threading;
 
 namespace AquaLogic_wpf
 {
@@ -26,9 +27,9 @@ namespace AquaLogic_wpf
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            if (_backgroundWorker != null)
+            if (_dispatcherTimer != null)
             {
-                _backgroundWorker.CancelAsync();
+                _dispatcherTimer.Stop();
             }
             Properties.Settings.Default.Save();
         }
@@ -48,17 +49,16 @@ namespace AquaLogic_wpf
 
          // Socket Control
 
-        private BackgroundWorker _backgroundWorker;
         private SocketProcess _socketProcess;
+        private DispatcherTimer _dispatcherTimer;
 
         private void RestartUART()
         {
-            if (_backgroundWorker != null)
+            if (_dispatcherTimer != null)
             {
-                _backgroundWorker.CancelAsync();
-                System.Threading.Thread.Sleep(125);
+                _dispatcherTimer.Stop();
             }
-            
+
             if (_socketProcess != null)
             {
                 _socketProcess.QueueKey("Reset");
@@ -69,13 +69,14 @@ namespace AquaLogic_wpf
 
         private void InitializeSocketProcess()
         {
-            _socketProcess = new(Properties.Settings.Default.ipAddr, Properties.Settings.Default.portNum);
+            _socketProcess = new(ipAddr.Text, Int32.Parse(portNum.Text));
 
             if (_socketProcess.Connected)
             {
-                InitializeBackgroundWorker();
-
-                _backgroundWorker.RunWorkerAsync();
+                _dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                _dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
+                _dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
+                _dispatcherTimer.Start();
             }
             else
             {
@@ -83,65 +84,27 @@ namespace AquaLogic_wpf
             }
         }
 
-        // Background Worker
-        private void InitializeBackgroundWorker()
+        int _vCnt = 0;
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            _backgroundWorker = new()
+            SocketProcess.SocketData socketData = _socketProcess.Update();
+
+            if (socketData.Valid)
             {
-                WorkerReportsProgress = true,
-                WorkerSupportsCancellation = true,
-            };
+                UpdateDisplay(socketData);
 
-            _backgroundWorker.DoWork +=
-                new DoWorkEventHandler(BackgroundWorker_DoWork);
-            
-            _backgroundWorker.RunWorkerCompleted +=
-                new RunWorkerCompletedEventHandler(
-            BackgroundWorker_RunWorkerCompleted);
-            
-            _backgroundWorker.ProgressChanged +=
-                new ProgressChangedEventHandler(
-            BackgroundWorker_ProgressChanged);
-        }
-
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            int vCnt = 0;
-            while (!_backgroundWorker.CancellationPending)
+                _vCnt = 0;
+            }
+            else
             {
-                System.Threading.Thread.Sleep(100);
-                SocketProcess.SocketData socketData = _socketProcess.Update();
-
-                if (socketData.Valid)
+                _vCnt += 1;
+                if (_vCnt > 100)
                 {
-                    _backgroundWorker.ReportProgress(0, socketData);
-                    vCnt = 0;
-                }
-                else
-                {
-                    vCnt += 1;
-                    if (vCnt > 100)
-                    {
-                        socketData.DisplayText = "Communication\nError";
-                        _backgroundWorker.ReportProgress(0, socketData);
-                        vCnt = 0;
-                    }
+                    socketData.DisplayText = "Communication\nError";
+                    UpdateDisplay(socketData);
+                    _vCnt = 0;
                 }
             }
-         }
-
-        private void BackgroundWorker_RunWorkerCompleted(
-           object sender, RunWorkerCompletedEventArgs e)
-        {
-        }
-
-        // This event handler updates the progress bar.
-
-        private void BackgroundWorker_ProgressChanged(object sender,
-            ProgressChangedEventArgs e)
-        {
-            SocketProcess.SocketData socketData = (SocketProcess.SocketData)e.UserState;
-            UpdateDisplay(socketData);
         }
 
         private readonly string _logPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "AquaLogic.csv");
