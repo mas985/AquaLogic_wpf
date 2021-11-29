@@ -117,28 +117,28 @@ namespace AquaLogic
 
         public SocketProcess(string ipAddr, int portNum)
         {
+            Reset(ipAddr, portNum);
+        }
+
+        public void Reset(string ipAddr, int portNum)
+        {
             try
             {
-                Reset(ipAddr, portNum);
+                if (_tcpClient != null && _tcpClient.Connected)
+                {
+                    _tcpClient.Close();
+                }
+                _tcpClient = new();
+                _tcpClient.NoDelay = true;
+                _tcpClient.ReceiveTimeout = 5000;
+                _tcpClient.SendTimeout = 1000;
+                _tcpClient.Connect(ipAddr.Trim(), portNum);
+                _netStream = _tcpClient.GetStream();
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine(e.Message);
             }
-        }
-
-        public void Reset(string ipAddr, int portNum)
-        {
-            if (_tcpClient != null && _tcpClient.Connected)
-            {
-                _tcpClient.Close();
-            }
-            _tcpClient = new();
-            _tcpClient.NoDelay = true;
-            _tcpClient.ReceiveTimeout = 5000;
-            _tcpClient.SendTimeout = 1000;
-            _tcpClient.Connect(ipAddr.Trim(), portNum);
-            _netStream = _tcpClient.GetStream();
         }
 
         public void Close()

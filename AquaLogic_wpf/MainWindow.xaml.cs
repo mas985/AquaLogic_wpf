@@ -116,6 +116,7 @@ namespace AquaLogic_wpf
         {
             int vCnt = 0;
             SocketProcess socketProcess = new(_ipAddr, _portNum);
+            Thread.Sleep(200);
             while (true)
             {
                 if (_key != "")
@@ -141,12 +142,15 @@ namespace AquaLogic_wpf
                     {
                         vCnt = 0;
                         socketProcess.Reset(_ipAddr, _portNum);
+                        Thread.Sleep(200);
                     }
                     else if (_resetSocket)
                     {
                         _resetSocket = false;
                         socketProcess.QueueKey("Reset");
+                        Thread.Sleep(200);
                         socketProcess.Reset(_ipAddr, _portNum);
+                        Thread.Sleep(200);
                     }
                     vCnt++;
                 }
