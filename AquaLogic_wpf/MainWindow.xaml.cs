@@ -54,33 +54,40 @@ namespace AquaLogic_wpf
         private DateTime _lastLog = DateTime.Now;
         private void UpdateDisplay(SocketProcess.SocketData socketData)
         {
-            if (socketData.DisplayText != null)
+            try
             {
-                TextDisplay.Text = socketData.DisplayText;
-            }
+                if (socketData.DisplayText != null)
+                {
+                    TextDisplay.Text = socketData.DisplayText;
+                }
 
-            if (socketData.Status != 0)
-            {
-                SetStatus(Pool, socketData.Status, socketData.Blink, SocketProcess.States.POOL);
-                SetStatus(Spa, socketData.Status, socketData.Blink, SocketProcess.States.SPA);
-                SetStatus(Spillover, socketData.Status, socketData.Blink, SocketProcess.States.SPILLOVER);
-                SetStatus(Filter, socketData.Status, socketData.Blink, SocketProcess.States.FILTER);
-                SetStatus(Lights, socketData.Status, socketData.Blink, SocketProcess.States.LIGHTS);
-                SetStatus(Heater1, socketData.Status, socketData.Blink, SocketProcess.States.HEATER_1);
-                SetStatus(Valve3, socketData.Status, socketData.Blink, SocketProcess.States.VALVE_3);
-                SetStatus(Valve4, socketData.Status, socketData.Blink, SocketProcess.States.VALVE_4);
-                SetStatus(Aux1, socketData.Status, socketData.Blink, SocketProcess.States.AUX_1);
-                SetStatus(Aux2, socketData.Status, socketData.Blink, SocketProcess.States.AUX_2);
-                SetStatus(Aux3, socketData.Status, socketData.Blink, SocketProcess.States.AUX_3);
-                SetStatus(Aux4, socketData.Status, socketData.Blink, SocketProcess.States.AUX_4);
-                SetStatus(Aux5, socketData.Status, socketData.Blink, SocketProcess.States.AUX_5);
-                SetStatus(Aux6, socketData.Status, socketData.Blink, SocketProcess.States.AUX_6);
-            }
+                if (socketData.Status != 0)
+                {
+                    SetStatus(Pool, socketData.Status, socketData.Blink, SocketProcess.States.POOL);
+                    SetStatus(Spa, socketData.Status, socketData.Blink, SocketProcess.States.SPA);
+                    SetStatus(Spillover, socketData.Status, socketData.Blink, SocketProcess.States.SPILLOVER);
+                    SetStatus(Filter, socketData.Status, socketData.Blink, SocketProcess.States.FILTER);
+                    SetStatus(Lights, socketData.Status, socketData.Blink, SocketProcess.States.LIGHTS);
+                    SetStatus(Heater1, socketData.Status, socketData.Blink, SocketProcess.States.HEATER_1);
+                    SetStatus(Valve3, socketData.Status, socketData.Blink, SocketProcess.States.VALVE_3);
+                    SetStatus(Valve4, socketData.Status, socketData.Blink, SocketProcess.States.VALVE_4);
+                    SetStatus(Aux1, socketData.Status, socketData.Blink, SocketProcess.States.AUX_1);
+                    SetStatus(Aux2, socketData.Status, socketData.Blink, SocketProcess.States.AUX_2);
+                    SetStatus(Aux3, socketData.Status, socketData.Blink, SocketProcess.States.AUX_3);
+                    SetStatus(Aux4, socketData.Status, socketData.Blink, SocketProcess.States.AUX_4);
+                    SetStatus(Aux5, socketData.Status, socketData.Blink, SocketProcess.States.AUX_5);
+                    SetStatus(Aux6, socketData.Status, socketData.Blink, SocketProcess.States.AUX_6);
+                }
 
-            if (socketData.LogText != null && Properties.Settings.Default.LogInt > 0 && DateTime.Now >= _lastLog.AddMinutes(Properties.Settings.Default.LogInt))
+                if (socketData.LogText != null && Properties.Settings.Default.LogInt > 0 && DateTime.Now >= _lastLog.AddMinutes(Properties.Settings.Default.LogInt))
+                {
+                    _lastLog = DateTime.Now;
+                    SocketProcess.WriteTextFile(_logPath, socketData.LogText);
+                }
+            }
+            catch (Exception e)
             {
-                _lastLog = DateTime.Now;
-                SocketProcess.WriteTextFile(_logPath, socketData.LogText);
+                System.Diagnostics.Debug.WriteLine(e.Message);
             }
         }
         private static void SetStatus(Button button, SocketProcess.States status, SocketProcess.States blink, SocketProcess.States state)

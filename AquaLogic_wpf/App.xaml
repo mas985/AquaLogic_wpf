@@ -12,6 +12,7 @@
                 <Setter Property="Foreground" Value="Black" />
                 <Setter Property="Background" Value="AliceBlue" />
                 <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontWeight" Value="Bold" />
                 <Setter Property="Margin" Value="3" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
                 <Setter Property="VerticalAlignment" Value="Stretch" />
