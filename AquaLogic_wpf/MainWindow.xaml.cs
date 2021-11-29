@@ -16,9 +16,10 @@ namespace AquaLogic_wpf
         {
             InitializeComponent();
             
-            Title = "AquaLogic PS8 - " + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " beta";
-
             InitializeBackgroundWorker();
+
+            App_Version.Text = "AquaLogic PS8 - " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
         }
 
         // UI Events
