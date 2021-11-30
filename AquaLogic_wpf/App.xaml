@@ -9,8 +9,8 @@
             <!--<Color x:Key="EntryColor">Ivory</Color>-->
 
              <Style TargetType="Label">
-                <Setter Property="Foreground" Value="Black" />
-                <Setter Property="Background" Value="AliceBlue" />
+                <Setter Property="Foreground" Value="AliceBlue" />
+                <Setter Property="Background" Value="Black" />
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="FontWeight" Value="Bold" />
                 <Setter Property="Margin" Value="3" />
@@ -19,8 +19,8 @@
             </Style>
 
              <Style TargetType="TextBox">
-                <Setter Property="Foreground" Value="Black" />
-                <Setter Property="Background" Value="AliceBlue" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Background" Value="Black" />
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="Margin" Value="3" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
