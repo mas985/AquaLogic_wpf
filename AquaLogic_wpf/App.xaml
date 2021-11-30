@@ -20,12 +20,13 @@
 
              <Style TargetType="TextBox">
                 <Setter Property="Foreground" Value="White" />
-                <Setter Property="Background" Value="Black" />
+                <Setter Property="Background" Value="DimGray" />
                 <Setter Property="FontSize" Value="20" />
                 <Setter Property="Margin" Value="3" />
                 <Setter Property="HorizontalAlignment" Value="Stretch" />
                 <Setter Property="VerticalAlignment" Value="Stretch" />
                 <Setter Property="Padding" Value="3" />
+                <Setter Property="BorderThickness" Value="0" />
             </Style>
 
              <Style TargetType="Button">
