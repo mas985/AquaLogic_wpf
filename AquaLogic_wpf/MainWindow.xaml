@@ -9,7 +9,7 @@
         Title="AquaLogic PS8" Closing="Window_Closing" Icon="/pool.ico" SizeToContent="Manual" MinHeight="640" MinWidth="360" Height="640" Width="360" ResizeMode="NoResize">
 
     <TabControl Background="Black" x:Name="tabControl" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
-        <TabItem Header="AquaLogic" Background="AliceBlue" FontSize="16">
+        <TabItem Header="AquaLogic" Background="Silver" FontSize="16">
 
             <Grid>
                 <Grid.RowDefinitions>
@@ -17,7 +17,7 @@
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="8*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="TextDisplay" Background="Black" Foreground="AliceBlue" FontSize="24" FontWeight="Bold" HorizontalContentAlignment="Center" IsReadOnly="True" ToolTip="Restart When Frozen"/>
+                <TextBox x:Name="TextDisplay" Background="Black" Foreground="Silver" FontSize="24" FontWeight="Bold" HorizontalContentAlignment="Center" IsReadOnly="True" ToolTip="Restart When Frozen"/>
  
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -83,14 +83,14 @@
             </Grid>
         </TabItem>
 
-        <TabItem Header="Settings" Background="AliceBlue" FontSize="16">
+        <TabItem Header="Settings" Background="Silver" FontSize="16">
              <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="11*"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button x:Name="Restart" Content="Restart" FontSize="24" Click="Restart_Click" Grid.Row="0"/>
+                <TextBox x:Name="App_Version" Background="Black" Foreground="Silver"  FontWeight="Bold" HorizontalContentAlignment="Center" IsReadOnly="True" Grid.Row="0"/>
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -137,8 +137,8 @@
                     <Label x:Name="Label11" Content="Log Interval:" Grid.Row="10"/>
 
                 </Grid>
-                <TextBox x:Name="App_Version" Background="Black" Foreground="AliceBlue"  FontWeight="Bold" HorizontalContentAlignment="Center" IsReadOnly="True" Grid.Row="2"/>
-            </Grid>
+                <Button x:Name="Restart" Content="Restart" FontSize="24" Click="Restart_Click" Grid.Row="2"/>
+             </Grid>
         </TabItem>
     </TabControl>
 </Window>
