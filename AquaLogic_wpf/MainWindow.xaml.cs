@@ -101,7 +101,7 @@ namespace AquaLogic_wpf
         readonly BackgroundWorker _backgroundWorker = new();
         private void InitializeBackgroundWorker()
         {
-            TextDisplay.Text = "Initializing";
+            TextDisplay.Text = "Connecting...";
 
             _ipAddr = ipAddr.Text;
             _portNum = Int32.Parse(portNum.Text);
