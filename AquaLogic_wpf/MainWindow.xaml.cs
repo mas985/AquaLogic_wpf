@@ -19,7 +19,6 @@ namespace AquaLogic_wpf
             InitializeBackgroundWorker();
 
             App_Version.Text = "AquaLogic PS8 - " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
         }
 
         // UI Events
