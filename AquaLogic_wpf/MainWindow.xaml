@@ -117,7 +117,7 @@
                 <Label x:Name="Label9" Content="Valve3 Label:" Grid.Row="9"/>
                 <Label x:Name="Label10" Content="Valve4 Label:" Grid.Row="10"/>
                 <Label x:Name="Label11" Content="Log Interval:" Grid.Row="11"/>
-                <Label x:Name="Label12" Content="EW11:" Grid.Row="12"/>
+                <Label x:Name="Label12" Content="Connection:" Grid.Row="12"/>
 
                 <Label x:Name="App_Version" Content="0.0.0.0" Grid.Row="0" Grid.Column="1"/>
 
