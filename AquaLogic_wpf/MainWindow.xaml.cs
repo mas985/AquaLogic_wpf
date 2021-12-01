@@ -1,12 +1,11 @@
-﻿using System;
+﻿using AquaLogic;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Reflection;
-using System.Windows.Threading;
-using AquaLogic;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Drawing;
 
 namespace AquaLogic_wpf
 {
@@ -18,8 +17,8 @@ namespace AquaLogic_wpf
             
             InitializeBackgroundWorker();
 
-            App_Version.Text = "AquaLogic PS8 - " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
-        }
+            App_Version.Content = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+         }
 
         // UI Events
 
@@ -44,7 +43,7 @@ namespace AquaLogic_wpf
             _portNum = Int32.Parse(portNum.Text);
             _resetSocket = true;
 
-            tabControl.SelectedIndex--;
+            TabCon.SelectedIndex--;
         }
 
         // UI Updates
