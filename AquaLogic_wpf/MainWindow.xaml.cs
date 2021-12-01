@@ -140,17 +140,11 @@ namespace AquaLogic_wpf
                         vCnt = 0;
                         _backgroundWorker.ReportProgress(vCnt, socketData);
                     }
-                    else if (vCnt == 50)
+                    else if (vCnt == 100)
                     {
                         _backgroundWorker.ReportProgress(vCnt, socketData);
                     }
-                    else if (vCnt == 300 || !socketProcess.Connected)
-                    {
-                        vCnt = 0;
-                        socketProcess.Reset(_ipAddr, _portNum);
-                        Thread.Sleep(200);
-                    }
-                    else if (_resetSocket)
+                     else if (_resetSocket)
                     {
                         _resetSocket = false;
                         socketProcess.QueueKey("Reset");
