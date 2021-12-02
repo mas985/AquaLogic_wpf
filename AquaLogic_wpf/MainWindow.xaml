@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:AquaLogic_wpf.Properties"
         mc:Ignorable="d"
         Background="Black"
-        Title="AquaLogic PS8" Closing="Window_Closing" Icon="/pool.ico" SizeToContent="Manual" MinHeight="640" MinWidth="360" Height="640" Width="360" ResizeMode="NoResize">
+        Title="AquaLogic PS8" Icon="/pool.ico" SizeToContent="Manual" MinHeight="640" MinWidth="360" Height="640" Width="360" ResizeMode="NoResize">
 
-    <TabControl Background="Black" x:Name="TabCon" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
+    <TabControl Background="Black" x:Name="TabCon" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom" SelectionChanged="OnTabSelected">
         <TabItem Header="AquaLogic" Background="LightGray" FontSize="16">
 
             <Grid>

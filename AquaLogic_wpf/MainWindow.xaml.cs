@@ -22,28 +22,37 @@ namespace AquaLogic_wpf
 
         // UI Events
 
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            Properties.Settings.Default.Save();
-        }
-
-        string _key = "";
-         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-             Button button = (Button)sender;
-            _key = button.Name;
-        }
-
         string _ipAddr;
         int _portNum;
+        int _logInt;
         bool _resetSocket;
-        private void Restart_Click(object sender, RoutedEventArgs e)
+        private void GetParms()
         {
             _ipAddr = ipAddr.Text;
-            _portNum = Int32.Parse(portNum.Text);
-            _resetSocket = true;
-
+            _ = int.TryParse(portNum.Text, out int pNum);
+            if (pNum > 0) { _portNum = pNum; }
+            portNum.Text = _portNum.ToString();
+            _ = int.TryParse(LogInt.Text, out _logInt);
+            LogInt.Text = _logInt.ToString();
+        }
+        protected void OnTabSelected(object sender, RoutedEventArgs e)
+        {
+            if (TabCon.SelectedIndex == 0)
+            {
+                GetParms();
+                Properties.Settings.Default.Save();
+            }
+        }
+        private void Restart_Click(object sender, RoutedEventArgs e)
+        {
             TabCon.SelectedIndex--;
+            _resetSocket = true;
+        }
+        string _key = "";
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            _key = button.Name;
         }
 
         // UI Updates
@@ -77,7 +86,7 @@ namespace AquaLogic_wpf
                     SetStatus(Aux6, socketData.Status, socketData.Blink, SocketProcess.States.AUX_6);
                 }
 
-                if (socketData.LogText != null && Properties.Settings.Default.LogInt > 0 && DateTime.Now >= _lastLog.AddMinutes(Properties.Settings.Default.LogInt))
+                if (socketData.LogText != null && _logInt > 0 && DateTime.Now >= _lastLog.AddMinutes(_logInt))
                 {
                     _lastLog = DateTime.Now;
                     SocketProcess.WriteTextFile(_logPath, socketData.LogText);
@@ -101,8 +110,7 @@ namespace AquaLogic_wpf
         {
             TextDisplay.Text = "Connecting...";
 
-            _ipAddr = ipAddr.Text;
-            _portNum = Int32.Parse(portNum.Text);
+            GetParms();
 
             _backgroundWorker.WorkerReportsProgress = true;
             _backgroundWorker.WorkerSupportsCancellation = true;
@@ -121,18 +129,19 @@ namespace AquaLogic_wpf
             DoWorkEventArgs e)
         {
             int vCnt = 0;
+            bool holdKey = false;
             SocketProcess socketProcess = new(_ipAddr, _portNum);
             Thread.Sleep(250);
             while (true)
             {
                 if (_key != "")
                 {
-                    socketProcess.QueueKey(_key);
+                    holdKey = socketProcess.QueueKey(_key);
                     _key = "";
                 }
                 else
                 {
-                     SocketProcess.SocketData socketData = socketProcess.Update();
+                    SocketProcess.SocketData socketData = socketProcess.Update();
 
                     if (socketData.HasData)
                     {
@@ -143,13 +152,23 @@ namespace AquaLogic_wpf
                     {
                         _backgroundWorker.ReportProgress(vCnt, socketData);
                     }
-                     else if (_resetSocket)
+                     else if (_resetSocket || !socketProcess.Connected)
                     {
                         _resetSocket = false;
-                        socketProcess.QueueKey("Reset");
-                        Thread.Sleep(250);
+                        if (socketProcess.Connected)
+                        {
+                            socketProcess.QueueKey("Reset");
+                            Thread.Sleep(250);
+                        }
                         socketProcess.Reset(_ipAddr, _portNum);
                         Thread.Sleep(250);
+                    }
+                    else if (holdKey)
+                    {
+                        socketData.HasData = true;
+                        socketData.DisplayText = "Please Wait...";
+                        holdKey = false;
+                        _backgroundWorker.ReportProgress(vCnt, socketData);
                     }
                     vCnt++;
                     Thread.Sleep(100);
