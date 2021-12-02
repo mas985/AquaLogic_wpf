@@ -16,8 +16,8 @@
     <TargetFramework>net5.0-windows</TargetFramework>
 
 	<ApplicationTitle>AquaLogic PS8</ApplicationTitle>
-	<Version>1.0.3.11</Version>
 	<Product>AquaLogic PS8</Product>
+	 <Version>1.0.4.12</Version>
   </PropertyGroup>
 
   <ItemGroup>
