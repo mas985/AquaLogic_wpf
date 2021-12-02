@@ -122,7 +122,7 @@ namespace AquaLogic_wpf
         {
             int vCnt = 0;
             SocketProcess socketProcess = new(_ipAddr, _portNum);
-            Thread.Sleep(200);
+            Thread.Sleep(250);
             while (true)
             {
                 if (_key != "")
@@ -132,10 +132,9 @@ namespace AquaLogic_wpf
                 }
                 else
                 {
-                    Thread.Sleep(100);
-                    SocketProcess.SocketData socketData = socketProcess.Update();
+                     SocketProcess.SocketData socketData = socketProcess.Update();
 
-                    if (socketData.Valid)
+                    if (socketData.HasData)
                     {
                         vCnt = 0;
                         _backgroundWorker.ReportProgress(vCnt, socketData);
@@ -148,11 +147,12 @@ namespace AquaLogic_wpf
                     {
                         _resetSocket = false;
                         socketProcess.QueueKey("Reset");
-                        Thread.Sleep(200);
+                        Thread.Sleep(250);
                         socketProcess.Reset(_ipAddr, _portNum);
-                        Thread.Sleep(200);
+                        Thread.Sleep(250);
                     }
                     vCnt++;
+                    Thread.Sleep(100);
                 }
             }
         }
@@ -160,7 +160,7 @@ namespace AquaLogic_wpf
            ProgressChangedEventArgs e)
         {
             SocketProcess.SocketData socketData = (SocketProcess.SocketData)e.UserState;
-            if (socketData.Valid)
+            if (socketData.HasData)
             {
                 TextDisplay.FontStyle = FontStyles.Normal;
                 UpdateDisplay(socketData);
