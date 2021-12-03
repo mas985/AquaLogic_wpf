@@ -15,10 +15,10 @@ namespace AquaLogic_wpf
         {
             InitializeComponent();
             
-            InitializeBackgroundWorker();
-
             App_Version.Content = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-         }
+            
+            InitializeBackgroundWorker();
+        }
 
         // UI Events
 

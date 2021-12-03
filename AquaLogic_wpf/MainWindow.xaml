@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AquaLogic_wpf.Properties"
         mc:Ignorable="d"
         Background="Black"
-        Title="AquaLogic PS8" Icon="/pool.ico" SizeToContent="Manual" MinHeight="640" MinWidth="360" Height="640" Width="360" ResizeMode="NoResize">
+        Title="AquaLogic PS8" Icon="/pool.ico" MinHeight ="720" MinWidth="405" Width ="405">
 
     <TabControl Background="Black" x:Name="TabCon" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom" SelectionChanged="OnTabSelected">
         <TabItem Header="AquaLogic" Background="LightGray" FontSize="16">
@@ -14,10 +14,12 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="7*"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="TextDisplay" Background="Black" Foreground="LightGray" FontSize="24" FontWeight="Bold" HorizontalContentAlignment="Center" IsReadOnly="True" ToolTip="Restart When Frozen"/>
+                <TextBox x:Name="TextDisplay" Background="Black" Foreground="LightGray" 
+                         FontSize="30" FontWeight="Bold" HorizontalContentAlignment="Center" 
+                         IsReadOnly="True" ToolTip="Restart When Frozen"/>
  
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>

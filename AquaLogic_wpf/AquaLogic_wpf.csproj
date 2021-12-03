@@ -17,7 +17,8 @@
 
 	<ApplicationTitle>AquaLogic PS8</ApplicationTitle>
 	<Product>AquaLogic PS8</Product>
-	 <Version>1.0.4.13</Version>
+	 <Version>1.0.4.14</Version>
+	 <EnforceCodeStyleInBuild>False</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <ItemGroup>
