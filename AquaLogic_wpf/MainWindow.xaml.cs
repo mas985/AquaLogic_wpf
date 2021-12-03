@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Threading;
 using System.Drawing;
+using System.Net;
 
 namespace AquaLogic_wpf
 {
@@ -16,7 +17,7 @@ namespace AquaLogic_wpf
             InitializeComponent();
             
             App_Version.Content = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            
+
             InitializeBackgroundWorker();
         }
 
@@ -26,30 +27,50 @@ namespace AquaLogic_wpf
         int _portNum;
         int _logInt;
         bool _resetSocket;
-        private void GetParms()
+        protected void OnLostFocus_TextBox(object sender, RoutedEventArgs e)
         {
-            _ipAddr = ipAddr.Text;
-            _ = int.TryParse(portNum.Text, out int pNum);
-            if (pNum > 0) { _portNum = pNum; }
-            portNum.Text = _portNum.ToString();
-            _ = int.TryParse(LogInt.Text, out _logInt);
-            LogInt.Text = _logInt.ToString();
-        }
-        protected void OnTabSelected(object sender, RoutedEventArgs e)
-        {
-            if (TabCon.SelectedIndex == 0)
+            TextBox textBox = (TextBox)sender;
+            if (textBox.Name == "IPaddr")
             {
-                GetParms();
+                if (IPAddress.TryParse(textBox.Text, out IPAddress ipAddress))
+                {
+                    _ipAddr = ipAddress.ToString();
+                    Properties.Settings.Default.Save();
+                }
+                else { textBox.Text = _ipAddr; }
+            }
+            else if (textBox.Name == "PortNum")
+            {
+                if (int.TryParse(textBox.Text, out int num))
+                {
+                    _portNum = num;
+                    Properties.Settings.Default.Save();
+                }
+                else { textBox.Text = _portNum.ToString(); }
+
+            }
+            else if (textBox.Name == "LogInt")
+            {
+                if (int.TryParse(textBox.Text, out int num))
+                {
+                    _logInt = num;
+                    Properties.Settings.Default.Save();
+                }
+                else { textBox.Text = _logInt.ToString(); }
+
+            }
+            else
+            {
                 Properties.Settings.Default.Save();
             }
         }
-        private void Restart_Click(object sender, RoutedEventArgs e)
+        protected void Restart_Click(object sender, RoutedEventArgs e)
         {
             TabCon.SelectedIndex--;
             _resetSocket = true;
         }
         string _key = "";
-        private void Button_Click(object sender, RoutedEventArgs e)
+        protected void Button_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             _key = button.Name;
@@ -110,7 +131,8 @@ namespace AquaLogic_wpf
         {
             TextDisplay.Text = "Connecting...";
 
-            GetParms();
+            _ipAddr = IPaddr.Text;
+            _ = int.TryParse(PortNum.Text, out _portNum);
 
             _backgroundWorker.WorkerReportsProgress = true;
             _backgroundWorker.WorkerSupportsCancellation = true;

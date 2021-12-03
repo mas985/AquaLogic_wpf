@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:AquaLogic_wpf.Properties"
         mc:Ignorable="d"
         Background="Black"
-        Title="AquaLogic PS8" Icon="/pool.ico" MinHeight ="720" MinWidth="405" Width ="405">
+        Title="AquaLogic PS8" Icon="/pool.ico" MinHeight ="770" MinWidth="400" Height ="770" Width ="400">
 
-    <TabControl Background="Black" x:Name="TabCon" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom" SelectionChanged="OnTabSelected">
+    <TabControl Background="Black" x:Name="TabCon" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
         <TabItem Header="AquaLogic" Background="LightGray" FontSize="16">
 
-            <Grid>
+            <Grid VerticalAlignment="Top" Height="696">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="3*"/>
@@ -19,7 +19,7 @@
                 </Grid.RowDefinitions>
                 <TextBox x:Name="TextDisplay" Background="Black" Foreground="LightGray" 
                          FontSize="30" FontWeight="Bold" HorizontalContentAlignment="Center" 
-                         IsReadOnly="True" ToolTip="Restart When Frozen"/>
+                         IsReadOnly="True" MinLines="2" MinHeight="96" ToolTip="Restart When Frozen"/>
  
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -36,18 +36,13 @@
                         </Grid.RowDefinitions>
 
                         <Button x:Name="PlusBtn" Content="+" FontSize="40" Click="Button_Click" Grid.Row="0"/>
-                        <Button x:Name="MenuBtn" Content="Menu" FontSize="30"  Click="Button_Click"  Grid.Row="1"/>
+                        <Button x:Name="MenuBtn" Content="Menu" FontSize="30" Click="Button_Click"  Grid.Row="1"/>
                         <Button x:Name="MinusBtn" Content="-" FontSize="40" Click="Button_Click" Grid.Row="2"/>
                     </Grid>
 
-                    <Button x:Name="LeftBtn" Content="&lt;" FontSize="40" Click="Button_Click" />
-                    <Button x:Name="RightBtn" Content="&gt;" FontSize="40" Click="Button_Click" Grid.Column="2"/>
-                    
-                    <!--<Button x:Name="MenuBtn" Content="Menu" VerticalAlignment="Center" FontSize="24" Click="Button_Click" Width="100" Height="70" Grid.Column="1"/>
-                    <Button x:Name="PlusBtn" Content="+" VerticalAlignment="Top" FontSize="36" Click="Button_Click" Width="100" Height="50" Grid.Column="1"/>
-                    <Button x:Name="MinusBtn" Content="-" VerticalAlignment="Bottom" FontSize="36" Click="Button_Click" Width="100" Height="50" Grid.Column="1"/>
-                    <Button x:Name="LeftBtn" Content="&lt;" FontSize="36" Click="Button_Click" Width="50" Height="170"/>
-                    <Button x:Name="RightBtn" Content="&gt;" FontSize="36" Click="Button_Click" Width="50" Height="170" Grid.Column="2"/>-->
+                    <Button x:Name="LeftBtn" Content="&lt;" MinHeight="164" FontSize="40" Click="Button_Click" />
+                    <Button x:Name="RightBtn" Content="&gt;" MinHeight="164" FontSize="40" Click="Button_Click" Grid.Column="2"/>
+ 
                 </Grid>
 
                 <Grid Grid.Row="2">
@@ -85,8 +80,8 @@
             </Grid>
         </TabItem>
 
-        <TabItem Header="Settings" Background="LightGray" FontSize="16">
-             <Grid>
+        <TabItem Header="Labels" Background="LightGray" FontSize="16">
+            <Grid VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -100,43 +95,57 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                 </Grid.RowDefinitions>
+
+                <Label x:Name="Label3" Content="Aux1 Label:" Grid.Row="0"/>
+                <Label x:Name="Label4" Content="Aux2 Label:" Grid.Row="1"/>
+                <Label x:Name="Label5" Content="Aux3 Label:" Grid.Row="2"/>
+                <Label x:Name="Label6" Content="Aux4 Label:" Grid.Row="3"/>
+                <Label x:Name="Label7" Content="Aux5 Label:" Grid.Row="4"/>
+                <Label x:Name="Label8" Content="Aux6 Label:" Grid.Row="5"/>
+                <Label x:Name="Label9" Content="Valve3 Label:" Grid.Row="6"/>
+                <Label x:Name="Label10" Content="Valve4 Label:" Grid.Row="7"/>
+
+                <TextBox x:Name="Aux1_Edit" Text="{Binding Aux1, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal"  Grid.Row="0" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
+                <TextBox x:Name="Aux2_Edit" Text="{Binding Aux2, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="1" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
+                <TextBox x:Name="Aux3_Edit" Text="{Binding Aux3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="2" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
+                <TextBox x:Name="Aux4_Edit" Text="{Binding Aux4, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="3" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
+                <TextBox x:Name="Aux5_Edit" Text="{Binding Aux5, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="4" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
+                <TextBox x:Name="Aux6_Edit" Text="{Binding Aux6, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="5" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
+                <TextBox x:Name="Valve3_Edit" Text="{Binding Valve3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="6" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
+                <TextBox x:Name="Valve4_Edit" Text="{Binding Valve4, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="7" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
+            </Grid>
+        </TabItem>
+        
+        <TabItem Header="Settings" Background="LightGray" FontSize="16">
+            <Grid VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition/>
+
                 </Grid.RowDefinitions>
 
                 <Label x:Name="Label0" Content="Version:" Grid.Row="0"/>
                 <Label x:Name="Label1" Content="IP Address:" Grid.Row="1"/>
                 <Label x:Name="Label2" Content="Port Number:" Grid.Row="2"/>
-                <Label x:Name="Label3" Content="Aux1 Label:" Grid.Row="3"/>
-                <Label x:Name="Label4" Content="Aux2 Label:" Grid.Row="4"/>
-                <Label x:Name="Label5" Content="Aux3 Label:" Grid.Row="5"/>
-                <Label x:Name="Label6" Content="Aux4 Label:" Grid.Row="6"/>
-                <Label x:Name="Label7" Content="Aux5 Label:" Grid.Row="7"/>
-                <Label x:Name="Label8" Content="Aux6 Label:" Grid.Row="8"/>
-                <Label x:Name="Label9" Content="Valve3 Label:" Grid.Row="9"/>
-                <Label x:Name="Label10" Content="Valve4 Label:" Grid.Row="10"/>
+
                 <Label x:Name="Label11" Content="Log Interval:" Grid.Row="11"/>
                 <Label x:Name="Label12" Content="Connection:" Grid.Row="12"/>
 
                 <Label x:Name="App_Version" Content="0.0.0.0" Grid.Row="0" Grid.Column="1"/>
 
-                <TextBox x:Name="ipAddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="1" Grid.Column="1" ToolTip="Restart After Change"/>
-                <TextBox x:Name="portNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="2" Grid.Column="1" ToolTip="Restart After Change"/>
+                <TextBox x:Name="IPaddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="1" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Restart After Change"/>
+                <TextBox x:Name="PortNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="2" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Restart After Change"/>
 
-                <TextBox x:Name="Aux1_Edit" Text="{Binding Aux1, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal"  Grid.Row="3" Grid.Column="1"/>
-                <TextBox x:Name="Aux2_Edit" Text="{Binding Aux2, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="4" Grid.Column="1"/>
-                <TextBox x:Name="Aux3_Edit" Text="{Binding Aux3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="5" Grid.Column="1"/>
-                <TextBox x:Name="Aux4_Edit" Text="{Binding Aux4, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="6" Grid.Column="1"/>
-                <TextBox x:Name="Aux5_Edit" Text="{Binding Aux5, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="7" Grid.Column="1"/>
-                <TextBox x:Name="Aux6_Edit" Text="{Binding Aux6, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="8" Grid.Column="1"/>
-                <TextBox x:Name="Valve3_Edit" Text="{Binding Valve3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="9" Grid.Column="1"/>
-                <TextBox x:Name="Valve4_Edit" Text="{Binding Valve4, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="10" Grid.Column="1"/>
-                <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="11" Grid.Column="1" ToolTip="Minutes"/>
+                <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="11" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Minutes"/>
 
-                <Button x:Name="Restart" Content="Restart" FontSize="24" Click="Restart_Click" Grid.Row="12" Grid.Column="1"/>
+                <Button x:Name="Restart" Content="Restart" FontSize="24" Grid.Row="12" Grid.Column="1" Click="Restart_Click"/>
              </Grid>
         </TabItem>
     </TabControl>
