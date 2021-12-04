@@ -11,7 +11,7 @@
     <TabControl Background="Black" x:Name="TabCon" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
         <TabItem Header="AquaLogic" Background="LightGray" FontSize="16">
 
-            <Grid VerticalAlignment="Top" Height="696">
+            <Grid VerticalAlignment="Top" Height="700">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="3*"/>
@@ -40,8 +40,8 @@
                         <Button x:Name="MinusBtn" Content="-" FontSize="40" Click="Button_Click" Grid.Row="2"/>
                     </Grid>
 
-                    <Button x:Name="LeftBtn" Content="&lt;" MinHeight="164" FontSize="40" Click="Button_Click" />
-                    <Button x:Name="RightBtn" Content="&gt;" MinHeight="164" FontSize="40" Click="Button_Click" Grid.Column="2"/>
+                    <Button x:Name="LeftBtn" Content="&lt;" MinHeight="174" FontSize="40" Click="Button_Click" />
+                    <Button x:Name="RightBtn" Content="&gt;" MinHeight="174" FontSize="40" Click="Button_Click" Grid.Column="2"/>
  
                 </Grid>
 
