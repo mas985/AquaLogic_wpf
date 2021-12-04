@@ -66,7 +66,7 @@ namespace AquaLogic_wpf
         }
         protected void Restart_Click(object sender, RoutedEventArgs e)
         {
-            TabCon.SelectedIndex--;
+            TabCon.SelectedIndex = 0;
             _resetSocket = true;
         }
         string _key = "";
