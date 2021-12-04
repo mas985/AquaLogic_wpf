@@ -128,24 +128,26 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
                 <Label x:Name="Label0" Content="Version:" Grid.Row="0"/>
                 <Label x:Name="Label1" Content="IP Address:" Grid.Row="1"/>
                 <Label x:Name="Label2" Content="Port Number:" Grid.Row="2"/>
 
-                <Label x:Name="Label11" Content="Log Interval:" Grid.Row="11"/>
-                <Label x:Name="Label12" Content="Connection:" Grid.Row="12"/>
+                <Label x:Name="Label11" Content="Log Interval:" Grid.Row="3"/>
+                <Label x:Name="Label12" Content="" Grid.Row="4"/>
+                <Label x:Name="Label13" Content="Connection:" Grid.Row="5"/>
 
                 <Label x:Name="App_Version" Content="0.0.0.0" Grid.Row="0" Grid.Column="1"/>
 
                 <TextBox x:Name="IPaddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="1" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Restart After Change"/>
                 <TextBox x:Name="PortNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="2" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Restart After Change"/>
 
-                <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="11" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Minutes"/>
+                <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="3" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Minutes"/>
 
-                <Button x:Name="Restart" Content="Restart" FontSize="24" Grid.Row="12" Grid.Column="1" Click="Restart_Click"/>
+                <Button x:Name="Restart" Content="Restart" FontSize="24" Grid.Row="5" Grid.Column="1" Click="Restart_Click"/>
              </Grid>
         </TabItem>
     </TabControl>
