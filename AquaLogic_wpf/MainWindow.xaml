@@ -10,7 +10,6 @@
 
     <TabControl Background="Black" x:Name="TabCon" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
         <TabItem Header="AquaLogic" Background="LightGray" FontSize="16">
-
             <Grid VerticalAlignment="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="100"/>
@@ -19,7 +18,7 @@
                 </Grid.RowDefinitions>
                 <TextBox x:Name="TextDisplay" Background="Black" Foreground="LightGray" 
                          FontSize="30" FontWeight="Bold" HorizontalContentAlignment="Center" 
-                         IsReadOnly="True" MinLines="2" MinHeight="80" ToolTip="Restart When Frozen"/>
+                         IsReadOnly="True" MinLines="2" MinHeight="80" ToolTip="Reset When Frozen"/>
  
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -130,25 +129,27 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Label x:Name="Label0" Content="Version:" Grid.Row="0"/>
-                <Label x:Name="Label1" Content="IP Address:" Grid.Row="1"/>
-                <Label x:Name="Label2" Content="Port Number:" Grid.Row="2"/>
+                <Label x:Name="Label1" Content="IP Address:" Grid.Row="0"/>
+                <Label x:Name="Label2" Content="Port Number:" Grid.Row="1"/>
+                <Label x:Name="Label11" Content="Log Interval:" Grid.Row="2"/>
 
-                <Label x:Name="Label11" Content="Log Interval:" Grid.Row="3"/>
-                <Label x:Name="Label12" Content="" Grid.Row="4"/>
-                <Label x:Name="Label13" Content="Connection:" Grid.Row="5"/>
+                <Label x:Name="Label12" Content="" Grid.Row="3"/>
+                <Label x:Name="Label13" Content="Connection:" Grid.Row="4"/>
+                <Label x:Name="Label14" Content="" Grid.Row="5"/>
+                <Label x:Name="Label15" Content="Version:" Grid.Row="6"/>
 
-                <Label x:Name="App_Version" Content="0.0.0.0" Grid.Row="0" Grid.Column="1"/>
+                <TextBox x:Name="IPaddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="0" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Reset After Change"/>
+                <TextBox x:Name="PortNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="1" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Reset After Change"/>
 
-                <TextBox x:Name="IPaddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="1" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Restart After Change"/>
-                <TextBox x:Name="PortNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="2" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Restart After Change"/>
+                <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="2" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Minutes"/>
 
-                <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="3" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Minutes"/>
+                <Button x:Name="Reset" Content="Reset" FontSize="24" Grid.Row="4" Grid.Column="1" Click="Reset_Click"/>
+                <Label x:Name="App_Version" Content="0.0.0.0" Grid.Row="6" Grid.Column="1"/>
 
-                <Button x:Name="Restart" Content="Restart" FontSize="24" Grid.Row="5" Grid.Column="1" Click="Restart_Click"/>
-             </Grid>
+            </Grid>
         </TabItem>
     </TabControl>
 </Window>

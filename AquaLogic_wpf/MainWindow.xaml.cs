@@ -26,7 +26,6 @@ namespace AquaLogic_wpf
         string _ipAddr;
         int _portNum;
         int _logInt;
-        bool _resetSocket;
         protected void OnLostFocus_TextBox(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
@@ -64,12 +63,12 @@ namespace AquaLogic_wpf
                 Properties.Settings.Default.Save();
             }
         }
-        protected void Restart_Click(object sender, RoutedEventArgs e)
+        string _key = "";
+        protected void Reset_Click(object sender, RoutedEventArgs e)
         {
             TabCon.SelectedIndex = 0;
-            _resetSocket = true;
+            _key = "Reset";
         }
-        string _key = "";
         protected void Button_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -150,16 +149,16 @@ namespace AquaLogic_wpf
        private void BackgroundWorker_DoWork(object sender,
             DoWorkEventArgs e)
         {
-            int vCnt = 0;
-            bool holdKey = false;
             SocketProcess socketProcess = new(_ipAddr, _portNum);
             Thread.Sleep(250);
+            DateTime lTime = DateTime.Now;
             while (true)
             {
-                if (_key != "")
+                if (!socketProcess.Connected || DateTime.Now.Subtract(lTime).Seconds > 5)
                 {
-                    holdKey = socketProcess.QueueKey(_key);
-                    _key = "";
+                    socketProcess.Reset(_ipAddr, _portNum);
+                    Thread.Sleep(250);
+                    lTime = DateTime.Now;
                 }
                 else
                 {
@@ -167,32 +166,26 @@ namespace AquaLogic_wpf
 
                     if (socketData.HasData)
                     {
-                        vCnt = 0;
-                        _backgroundWorker.ReportProgress(vCnt, socketData);
+                        _backgroundWorker.ReportProgress(0, socketData);
+                        lTime = DateTime.Now;
                     }
-                    else if (vCnt == 100)
+
+                    if (_key != "")
                     {
-                        _backgroundWorker.ReportProgress(vCnt, socketData);
-                    }
-                     else if (_resetSocket || !socketProcess.Connected)
-                    {
-                        _resetSocket = false;
-                        if (socketProcess.Connected)
+                        if (socketProcess.QueueKey(_key))
                         {
-                            socketProcess.QueueKey("Reset");
-                            Thread.Sleep(250);
+                            socketData.HasData = true;
+                            socketData.DisplayText = "Please Wait...";
+                            _backgroundWorker.ReportProgress(0, socketData);
                         }
-                        socketProcess.Reset(_ipAddr, _portNum);
-                        Thread.Sleep(250);
+                        else if (_key == "Reset")
+                        {
+                            socketData.HasData = true;
+                            socketData.DisplayText = "Connection Reset...";
+                            _backgroundWorker.ReportProgress(0, socketData);
+                        }
+                        _key = "";
                     }
-                    else if (holdKey)
-                    {
-                        socketData.HasData = true;
-                        socketData.DisplayText = "Please Wait...";
-                        holdKey = false;
-                        _backgroundWorker.ReportProgress(vCnt, socketData);
-                    }
-                    vCnt++;
                     Thread.Sleep(100);
                 }
             }
@@ -203,12 +196,7 @@ namespace AquaLogic_wpf
             SocketProcess.SocketData socketData = (SocketProcess.SocketData)e.UserState;
             if (socketData.HasData)
             {
-                TextDisplay.FontStyle = FontStyles.Normal;
                 UpdateDisplay(socketData);
-            }
-            else
-            {
-                TextDisplay.FontStyle = FontStyles.Italic;
             }
         }
         private void BackgroundWorker_RunWorkerCompleted(
