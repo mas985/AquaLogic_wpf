@@ -18,7 +18,7 @@
                 </Grid.RowDefinitions>
                 <TextBox x:Name="TextDisplay" Background="Black" Foreground="LightGray" 
                          FontSize="30" FontWeight="Bold" HorizontalContentAlignment="Center" 
-                         IsReadOnly="True" MinLines="2" MinHeight="80" ToolTip="Reset When Frozen"/>
+                         IsReadOnly="True" MinLines="2" ToolTip="Reset When Frozen"/>
  
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -35,7 +35,7 @@
                         </Grid.RowDefinitions>
 
                         <Button x:Name="PlusBtn" Content="+" FontSize="40" Click="Button_Click" Grid.Row="0"/>
-                        <Button x:Name="MenuBtn" Content="Menu" FontSize="30" Click="Button_Click"  Grid.Row="1"/>
+                        <Button x:Name="MenuBtn" Content="Menu" Click="Button_Click"  Grid.Row="1"/>
                         <Button x:Name="MinusBtn" Content="-" FontSize="40" Click="Button_Click" Grid.Row="2"/>
                     </Grid>
 
