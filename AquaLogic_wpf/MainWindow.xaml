@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AquaLogic_wpf.Properties"
         mc:Ignorable="d"
         Background="Black"
-        Title="AquaLogic PS8" Icon="/pool.ico" MinHeight ="780" MinWidth="400" Height ="780" Width ="400">
+        Title="AquaLogic PS8" Icon="/pool.ico" MinHeight ="800" MinWidth="400" Height ="800" Width ="400">
 
     <TabControl Background="Black" x:Name="TabCon" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
         <TabItem Header="AquaLogic" Background="LightGray" FontSize="16">
@@ -80,7 +80,7 @@
         </TabItem>
 
         <TabItem Header="Labels" Background="LightGray" FontSize="16">
-            <Grid VerticalAlignment="Top">
+            <Grid VerticalAlignment="Top" Height="480">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -117,7 +117,7 @@
         </TabItem>
         
         <TabItem Header="Settings" Background="LightGray" FontSize="16">
-            <Grid VerticalAlignment="Top">
+            <Grid VerticalAlignment="Top" Height="420">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
