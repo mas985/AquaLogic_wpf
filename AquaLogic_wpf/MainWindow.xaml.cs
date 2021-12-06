@@ -149,14 +149,13 @@ namespace AquaLogic_wpf
        private void BackgroundWorker_DoWork(object sender,
             DoWorkEventArgs e)
         {
-            SocketProcess socketProcess = new(_ipAddr, _portNum);
-            Thread.Sleep(250);
+            SocketProcess socketProcess = new();
             DateTime lTime = DateTime.Now;
             while (true)
             {
                 if (!socketProcess.Connected || DateTime.Now.Subtract(lTime).Seconds > 5)
                 {
-                    socketProcess.Reset(_ipAddr, _portNum);
+                    socketProcess.Connect(_ipAddr, _portNum);
                     Thread.Sleep(250);
                     lTime = DateTime.Now;
                 }
