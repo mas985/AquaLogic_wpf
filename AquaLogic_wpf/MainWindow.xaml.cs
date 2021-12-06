@@ -180,7 +180,7 @@ namespace AquaLogic_wpf
                         else if (_key == "Reset")
                         {
                             socketData.HasData = true;
-                            socketData.DisplayText = "Connection Reset...";
+                            socketData.DisplayText = "Remote Device Reset...";
                             _backgroundWorker.ReportProgress(0, socketData);
                         }
                         _key = "";
