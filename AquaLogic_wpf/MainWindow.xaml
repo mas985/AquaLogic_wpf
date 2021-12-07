@@ -17,7 +17,7 @@
                     <RowDefinition Height="420"/>
                 </Grid.RowDefinitions>
                 <TextBox x:Name="TextDisplay" Background="Black" Foreground="LightGray" 
-                         FontSize="30" FontWeight="Bold" HorizontalContentAlignment="Center" 
+                         FontSize="30" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
                          IsReadOnly="True" MinLines="2" ToolTip="Reset When Frozen"/>
  
                 <Grid Grid.Row="1">
