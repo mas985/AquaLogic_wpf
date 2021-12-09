@@ -18,6 +18,8 @@ namespace AquaLogic_wpf
             
             App_Version.Content = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
+            GetSettings();
+
             InitializeBackgroundWorker();
         }
 
@@ -26,49 +28,36 @@ namespace AquaLogic_wpf
         string _ipAddr;
         int _portNum;
         int _logInt;
+        private void GetSettings()
+        {
+            if (IPAddress.TryParse(IPaddr.Text, out IPAddress ipAddress))
+            {
+                _ipAddr = ipAddress.ToString();
+            }
+            else { IPaddr.Text = _ipAddr; }
+
+
+            if (int.TryParse(PortNum.Text, out int pNum))
+            {
+                _portNum = pNum;
+            }
+            else { PortNum.Text = _portNum.ToString(); }
+
+            _ = int.TryParse(LogInt.Text, out _logInt);
+            LogInt.Text = _logInt.ToString();
+        }
         protected void OnLostFocus_TextBox(object sender, RoutedEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
-            if (textBox.Name == "IPaddr")
-            {
-                if (IPAddress.TryParse(textBox.Text, out IPAddress ipAddress))
-                {
-                    _ipAddr = ipAddress.ToString();
-                    Properties.Settings.Default.Save();
-                }
-                else { textBox.Text = _ipAddr; }
-            }
-            else if (textBox.Name == "PortNum")
-            {
-                if (int.TryParse(textBox.Text, out int num))
-                {
-                    _portNum = num;
-                    Properties.Settings.Default.Save();
-                }
-                else { textBox.Text = _portNum.ToString(); }
-
-            }
-            else if (textBox.Name == "LogInt")
-            {
-                if (int.TryParse(textBox.Text, out int num))
-                {
-                    _logInt = num;
-                    Properties.Settings.Default.Save();
-                }
-                else { textBox.Text = _logInt.ToString(); }
-
-            }
-            else
-            {
-                Properties.Settings.Default.Save();
-            }
+            if (!textBox.Name.Contains("_Edit")) { GetSettings(); }
+            Properties.Settings.Default.Save();
         }
         string _key = "";
         protected void Reset_Click(object sender, RoutedEventArgs e)
         {
-            TabCon.SelectedIndex = 0;
             _key = "Reset";
-        }
+            TabCon.SelectedIndex = 0;
+         }
         protected void Button_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -129,9 +118,6 @@ namespace AquaLogic_wpf
         private void InitializeBackgroundWorker()
         {
             TextDisplay.Text = "Connecting...";
-
-            _ipAddr = IPaddr.Text;
-            _ = int.TryParse(PortNum.Text, out _portNum);
 
             _backgroundWorker.WorkerReportsProgress = true;
             _backgroundWorker.WorkerSupportsCancellation = true;
