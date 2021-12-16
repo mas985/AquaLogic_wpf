@@ -8,7 +8,8 @@
         Background="Black"
         Title="AquaLogic PS8" Icon="/pool.ico" MinHeight ="800" MinWidth="400" Height ="800" Width ="400">
 
-    <TabControl Background="Black" x:Name="TabCon" ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
+    <TabControl Background="Black" x:Name="TabCon"
+                ScrollViewer.VerticalScrollBarVisibility="Disabled" TabStripPlacement="Bottom">
         <TabItem Header="AquaLogic" Background="LightGray" FontSize="16">
             <Grid VerticalAlignment="Top">
                 <Grid.RowDefinitions>

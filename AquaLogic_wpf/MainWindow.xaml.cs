@@ -51,6 +51,7 @@ namespace AquaLogic_wpf
             TextBox textBox = (TextBox)sender;
             if (!textBox.Name.Contains("_Edit")) { GetSettings(); }
             Properties.Settings.Default.Save();
+            e.Handled = true;
         }
         string _key = "";
         protected void Reset_Click(object sender, RoutedEventArgs e)
