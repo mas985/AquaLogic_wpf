@@ -54,15 +54,14 @@ namespace AquaLogic_wpf
             e.Handled = true;
         }
         string _key = "";
-        protected void Reset_Click(object sender, RoutedEventArgs e)
-        {
-            _key = "Reset";
-            TabCon.SelectedIndex = 0;
-         }
         protected void Button_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             _key = button.Name;
+            if (_key == "Reset")
+            {
+                TabCon.SelectedIndex = 0;
+            }
         }
 
         // UI Updates
@@ -94,6 +93,7 @@ namespace AquaLogic_wpf
                     SetStatus(Aux4, socketData.Status, socketData.Blink, SocketProcess.States.AUX_4);
                     SetStatus(Aux5, socketData.Status, socketData.Blink, SocketProcess.States.AUX_5);
                     SetStatus(Aux6, socketData.Status, socketData.Blink, SocketProcess.States.AUX_6);
+                    SetStatus(Service, socketData.Status, socketData.Blink, SocketProcess.States.SERVICE);
                 }
 
                 if (socketData.LogText != null && _logInt > 0 && DateTime.Now >= _lastLog.AddMinutes(_logInt))
@@ -170,9 +170,9 @@ namespace AquaLogic_wpf
                         }
                         else if (_key == "Reset")
                         {
-                            System.Diagnostics.Debug.WriteLine(string.Format("{0} {1}", DateTime.Now, "Restart Device"));
+                            System.Diagnostics.Debug.WriteLine(string.Format("{0} {1}", DateTime.Now, "Reset Device"));
                             socketData.HasData = true;
-                            socketData.DisplayText = "Restart Remote Device...";
+                            socketData.DisplayText = "Remote Device Reset...";
                             _backgroundWorker.ReportProgress(0, socketData);
                         }
                         _key = "";
