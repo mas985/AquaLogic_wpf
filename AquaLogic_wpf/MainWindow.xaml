@@ -118,12 +118,14 @@
         </TabItem>
 
         <TabItem Header="Settings" Background="LightGray" FontSize="16" LostFocus="OnLostFocus_Settings" >
-            <Grid VerticalAlignment="Top" Height="480">
+            <Grid VerticalAlignment="Top" Height="600">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -149,8 +151,11 @@
                 <Label x:Name="Label16" Content="Remote Device:" Grid.Row="6"/>
                 <Button x:Name="Reset" Content="Reset" Click="Button_Click" Grid.Row="6" Grid.Column="1"/>
 
-                <Label x:Name="Label17" Content="Version:" Grid.Row="7"/>
-                <Label x:Name="App_Version" Content="0.0.0.0" HorizontalContentAlignment="Center" Grid.Row="7" Grid.Column="1"/>
+                <Label x:Name="Label18" Content="Version:" Grid.Row="8"/>
+                <Label x:Name="App_Version" Content="0.0.0.0" HorizontalContentAlignment="Center" Grid.Row="8" Grid.Column="1"/>
+                
+                <Label x:Name="Label19" Content="Developer:" Grid.Row="9"/>
+                <Label x:Name="Developer" Content="MAS Consulting" HorizontalContentAlignment="Center" Grid.Row="9" Grid.Column="1"/>
             </Grid>
         </TabItem>
     </TabControl>
