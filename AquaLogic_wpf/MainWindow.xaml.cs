@@ -46,10 +46,14 @@ namespace AquaLogic_wpf
             _ = int.TryParse(LogInt.Text, out _logInt);
             LogInt.Text = _logInt.ToString();
         }
-        protected void OnLostFocus_TextBox(object sender, RoutedEventArgs e)
+        protected void OnLostFocus_Settings(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (!textBox.Name.Contains("_Edit")) { GetSettings(); }
+            GetSettings();
+            Properties.Settings.Default.Save();
+            e.Handled = true;
+        }
+        protected void OnLostFocus_Labels(object sender, RoutedEventArgs e)
+        {
             Properties.Settings.Default.Save();
             e.Handled = true;
         }

@@ -106,14 +106,14 @@
                 <Label x:Name="Label6" Content="Valve3 Label:" Grid.Row="6"/>
                 <Label x:Name="Label7" Content="Valve4 Label:" Grid.Row="7"/>
 
-                <TextBox x:Name="Aux1_Edit" Text="{Binding Aux1, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal"  Grid.Row="0" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
-                <TextBox x:Name="Aux2_Edit" Text="{Binding Aux2, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="1" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
-                <TextBox x:Name="Aux3_Edit" Text="{Binding Aux3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="2" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
-                <TextBox x:Name="Aux4_Edit" Text="{Binding Aux4, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="3" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
-                <TextBox x:Name="Aux5_Edit" Text="{Binding Aux5, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="4" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
-                <TextBox x:Name="Aux6_Edit" Text="{Binding Aux6, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="5" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
-                <TextBox x:Name="Valve3_Edit" Text="{Binding Valve3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="6" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
-                <TextBox x:Name="Valve4_Edit" Text="{Binding Valve4, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="7" Grid.Column="1" LostFocus="OnLostFocus_TextBox" />
+                <TextBox x:Name="Aux1_Edit" Text="{Binding Aux1, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal"  Grid.Row="0" Grid.Column="1" LostFocus="OnLostFocus_Settings" />
+                <TextBox x:Name="Aux2_Edit" Text="{Binding Aux2, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="1" Grid.Column="1" LostFocus="OnLostFocus_Settings" />
+                <TextBox x:Name="Aux3_Edit" Text="{Binding Aux3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="2" Grid.Column="1" LostFocus="OnLostFocus_Settings" />
+                <TextBox x:Name="Aux4_Edit" Text="{Binding Aux4, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="3" Grid.Column="1" LostFocus="OnLostFocus_Settings" />
+                <TextBox x:Name="Aux5_Edit" Text="{Binding Aux5, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="4" Grid.Column="1" LostFocus="OnLostFocus_Settings" />
+                <TextBox x:Name="Aux6_Edit" Text="{Binding Aux6, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="5" Grid.Column="1" LostFocus="OnLostFocus_Settings" />
+                <TextBox x:Name="Valve3_Edit" Text="{Binding Valve3, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="6" Grid.Column="1" LostFocus="OnLostFocus_Settings" />
+                <TextBox x:Name="Valve4_Edit" Text="{Binding Valve4, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="7" Grid.Column="1" LostFocus="OnLostFocus_Settings" />
             </Grid>
         </TabItem>
         
@@ -135,13 +135,13 @@
                 </Grid.RowDefinitions>
 
                 <Label x:Name="Label10" Content="IP Address:" Grid.Row="0"/>
-                <TextBox x:Name="IPaddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="0" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Reset After Change"/>
+                <TextBox x:Name="IPaddr" Text="{Binding ipAddr, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="0" Grid.Column="1" LostFocus="OnLostFocus_Settings" ToolTip="Reset After Change"/>
 
                 <Label x:Name="Label11" Content="Port Number:" Grid.Row="1"/>
-                <TextBox x:Name="PortNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="1" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Reset After Change"/>
+                <TextBox x:Name="PortNum" Text="{Binding portNum, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="1" Grid.Column="1" LostFocus="OnLostFocus_Settings" ToolTip="Reset After Change"/>
   
                 <Label x:Name="Label12" Content="Log Interval:" Grid.Row="2"/>
-                <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="2" Grid.Column="1" LostFocus="OnLostFocus_TextBox" ToolTip="Minutes"/>
+                <TextBox x:Name="LogInt" Text="{Binding LogInt, Source={x:Static local:Settings.Default}}" MaxLines="1" FontWeight="Normal" Grid.Row="2" Grid.Column="1" LostFocus="OnLostFocus_Settings" ToolTip="Minutes"/>
                 
                 <Label x:Name="Label14" Content="Service Mode:" Grid.Row="4"/>
                 <Button x:Name="Service" Content="Service" Click="Button_Click" Grid.Row="4" Grid.Column="1"/>
