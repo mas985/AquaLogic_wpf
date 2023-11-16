@@ -17,7 +17,7 @@
                     <RowDefinition Height="180"/>
                     <RowDefinition Height="420"/>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="TextDisplay" Background="Black" Foreground="LightGray" 
+                <TextBox x:Name="TextDisplay" Background="Black" Foreground="LightGray"  
                          FontSize="30" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
                          IsReadOnly="True" MinLines="2" ToolTip="Reset When Frozen"/>
  
@@ -40,8 +40,8 @@
                         <Button x:Name="MinusBtn" Content="-" FontSize="40" Click="Button_Click" Grid.Row="2"/>
                     </Grid>
 
-                    <Button x:Name="LeftBtn" Content="&lt;" MinHeight="174" FontSize="40" Click="Button_Click" />
-                    <Button x:Name="RightBtn" Content="&gt;" MinHeight="174" FontSize="40" Click="Button_Click" Grid.Column="2"/>
+                    <Button x:Name="LeftBtn" Content="&lt;" MinHeight="170" FontSize="40" Click="Button_Click" />
+                    <Button x:Name="RightBtn" Content="&gt;" MinHeight="170" FontSize="40" Click="Button_Click" Grid.Column="2"/>
  
                 </Grid>
 

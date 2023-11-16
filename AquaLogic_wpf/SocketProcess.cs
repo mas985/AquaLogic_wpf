@@ -114,10 +114,12 @@ namespace AquaLogic
                 if (IPAddress.TryParse(ipAddr, out IPAddress ipAddress) && portNum > 0)
                 {
                     _tcpClient.Close();
-                    _tcpClient = new();
-                    _tcpClient.NoDelay = true;
-                    _tcpClient.ReceiveTimeout = 5000;
-                    _tcpClient.SendTimeout = 1000;
+                    _tcpClient = new()
+                    {
+                        NoDelay = true,
+                        ReceiveTimeout = 5000,
+                        SendTimeout = 1000
+                    };
                     _tcpClient.Connect(ipAddr.Trim(), portNum);
                 }
             }
@@ -308,22 +310,23 @@ namespace AquaLogic
                             }
                             else if (bytes[2] == 0x01 && bytes[3] == 0x03) // Display
                             {
-                                socketData.DisplayText = Byte2string(bytes, 4, bytes.Length - 9);
-                                socketData.HasData = true;
-                                if (socketData.DisplayText.Contains("Air Temp"))
+                                string dText = Byte2string(bytes, 4, bytes.Length - 9);
+                                if (dText.Contains("Air Temp"))
                                 {
-                                    _airT = GetTemp(socketData.DisplayText);
+                                    _airT = GetTemp(dText);
                                     socketData.LogText = DateTime.Now.ToString() + "," + _airT.ToString() + "," + _poolT.ToString() + "," + _spaT.ToString(); // Update only after air T
                                 }
-                                else if (socketData.DisplayText.Contains("Pool Temp"))
+                                else if (dText.Contains("Pool Temp"))
                                 {
-                                    _poolT = GetTemp(socketData.DisplayText);
+                                    _poolT = GetTemp(dText);
                                 }
-                                else if (socketData.DisplayText.Contains("Spa Temp"))
+                                else if (dText.Contains("Spa Temp"))
                                 {
-                                    _spaT = GetTemp(socketData.DisplayText);
+                                    _spaT = GetTemp(dText);
                                 }
-                                _menu_locked = socketData.DisplayText.Contains("Menu-Locked");
+                                _menu_locked = dText.Contains("Menu-Locked");
+                                socketData.DisplayText = dText;
+                                socketData.HasData = true;
                             }
                             else if (bytes[2] == 0x00 && bytes[3] == 0x02)
                             {

@@ -13,7 +13,7 @@
     <Authors>Mark Schulz</Authors>
     <Company>MAS Consulting</Company>
     <Description>AquaLogic PS8 Remote Emulator</Description>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows8.0</TargetFramework>
 
 	<ApplicationTitle>AquaLogic PS8</ApplicationTitle>
 	<Product>AquaLogic PS8</Product>
